@@ -11,12 +11,7 @@
     <title>UAQ Forms - Home</title>
 </head>
 <body>
-    <div class="progress-wrap">
-		<svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-			<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-		</svg>
-	</div>
-    <nav class="navbar navbar-expand-xl navbar-light bg-white fixed-top">
+    <nav class="navbar navbar-expand-xl navbar-light bg-white fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" width="68" height="49"></a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,17 +19,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0 mt-lg-0 mt-3">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a> </li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a> </li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Expertise</a> </li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="solutions.html">Solutions</a> </li>
-                <li class="nav-item"><a class="nav-link" aria-current="page" href="gellary.html">Gallery</a> </li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Solutions</a> </li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Gallery</a> </li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Get Quote</a> </li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Contact us</a> </li>
             </ul>
             </div>
         </div>
     </nav>
-    <header class="header-top">
+    <header>
         <div class="swiper header">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" style="background-color: #8DD8D4;">
@@ -381,7 +376,6 @@
         var swiper = new Swiper(".header", {
             spaceBetween: 30,
             effect: "fade",
-            loop:true,
             autoplay: true,
         });
         var swiper = new Swiper(".solutions", {

@@ -1,6 +1,57 @@
 @import url('https://fonts.cdnfonts.com/css/satoshi');
+h1,h2,h3,h4,h5{
+    color: ;
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(../fonts/fa-brands-400.woff2) format("woff2"), url(../fonts/fa-brands-400.woff) format("woff"), url(../fonts/fa-brands-400.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Duotone";
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url(../fonts/fa-duotone-900.woff2) format("woff2"), url(../fonts/fa-duotone-900.woff) format("woff"), url(../fonts/fa-duotone-900.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Pro";
+    font-style: normal;
+    font-weight: 300;
+    font-display: block;
+    src: url(../fonts/fa-light-300.woff2) format("woff2"), url(../fonts/fa-light-300.woff) format("woff"), url(../fonts/fa-light-300.ttf) format("truetype")
+}
+@font-face {
+    font-family: "Font Awesome 6 Pro";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(../fonts/fa-regular-400.woff2) format("woff2"), url(../fonts/fa-regular-400.woff) format("woff"), url(../fonts/fa-regular-400.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Pro";
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url(../fonts/fa-solid-900.woff2) format("woff2"), url(../fonts/fa-solid-900.woff) format("woff"), url(../fonts/fa-solid-900.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Pro";
+    font-style: normal;
+    font-weight: 100;
+    font-display: block;
+    src: url(../fonts/fa-thin-100.woff2) format("woff2"), url(../fonts/fa-thin-100.woff) format("woff"), url(../fonts/fa-thin-100.ttf) format("truetype")
+}
+
 :root{
     --font-size:32px;
+    --text-color-black: #262A34;
 }
 body{
     overflow-x: hidden;
@@ -19,7 +70,7 @@ body{
     font-style: normal;
     font-weight: 500;
     line-height: 18px; /* 100% */}
-header{
+.header-top{
     margin-top: 110px;
 }
 header .swiper-slide{
@@ -61,7 +112,7 @@ header .swiper-slide h1{
     .about-us .right-side{
         padding:50px 15px;
     }
-    header{
+    .header-top{
         margin-top: 89px;
     }
     .navbar{
@@ -206,8 +257,85 @@ footer a:hover{
 footer a:hover::before{
     width: 10px;
 }
+@media(max-width:767px){
+    footer .links a{
+        font-size: 13px;
+    }
+    .fs-main{
+        font-size: 20px !important;
+    }
+    .navbar ul{
+        gap: 8px;
+    }
+    .navbar ul li a{
+        font-size: 15px;
+    }
+    .services .service h5,
+    .computer-forms .group p,
+    .computer-forms h3,
+    .about-us h1{
+        font-size: 19px;
+    }
+}
 /* Footer */
+
+.breadcrumb{
+    padding: 150px 0;
+    background: linear-gradient(90deg, #ED6EA0 0%, #ED6EA0 0.01%, #EC8C69 100%);
+}
+.breadcrumb > h1{
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 82px; /* 205% */
+    text-transform: uppercase;
+}
+.breadcrumb > h1 span{
+    font-weight: 400;
+}
+.breadcrumb .box{
+    display: flex;
+    width: 431.143px;
+    padding: 41px 158px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    bottom: -100px;
+    right: 0;
+    left: 0;
+}
+.breadcrumb .box h1{
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%; /* 62.5px */
+}
+.breadcrumb .box h5{
+    color: #7B7B7B;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.22px;
+}
+@media(max-width:767px){
+    .breadcrumb .box{
+        width: 250px;
+    }
+    .breadcrumb .box h1, .breadcrumb > h1{
+        font-size: 25px;
+    }
+    .breadcrumb .box h5{
+        font-size: 20px;
+    }
+}
 /* Framework */
+.object-cover{
+    object-fit: cover;
+}
+.object-contain{
+    object-fit: contain;
+}
 .btn{
     position: relative;
     transition: 0.2s ease-in-out;
@@ -231,10 +359,16 @@ footer a:hover::before{
     background-color: #1280C4;}
 .text-primary-main{
     color: #1280C4;}
+.text-color-black{
+    color: var(--text-color-black);
+}
 .border-primary-main{
     border:2px solid #1280C4;}
 .fs-main{
     font-size: var(--font-size);
+}
+.fs-16{
+    font-size: 16px !important;
 }
 .p-main{
     padding: 100px 0;
@@ -249,4 +383,149 @@ footer a:hover::before{
 }
 .hidden-nav {
     top: -110px;
+}
+
+
+.progress-wrap {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	height: 46px;
+	width: 46px;
+	cursor: pointer;
+	display: block;
+	border-radius: 50px;
+	box-shadow: inset  0 0 0 2px rgba(255,255,255,0.2);
+	z-index: 10000;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateX(30px);
+	-webkit-transition: all 0.2s ease-in-out;
+    background-color: #1280C4; 
+    transition: all 0.2s ease-in-out;
+}
+.progress-wrap.active-progress {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(0);
+}
+.progress-wrap::after {
+	content: '\f062';
+	position: absolute;
+	font-family: 'Font Awesome 6 Pro';
+	text-align: center;
+	line-height: 46px;
+	font-size: 20px;
+	color: #fff;
+	left: 0;
+	top: 0;
+	height: 46px;
+	width: 46px;
+	cursor: pointer;
+	display: block;
+	z-index: 1;
+	-webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.progress-wrap:hover::after {
+	transform: translateY(-2px);
+}
+.progress-wrap::before {
+	position: absolute;
+	font-family: 'unicons';
+	content: '\e84b';
+	text-align: center;
+	line-height: 46px;
+	font-size: 20px;
+	opacity: 0;
+	/* background-image: radial-gradient(circle, rgba(9,93,168,1) 0%, rgba(15,38,111,1) 100%, rgba(18,58,165,1) 100%); */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	left: 0;
+	top: 0;
+	height: 46px;
+	width: 46px;
+	cursor: pointer;
+	display: block;
+	z-index: 2;
+	-webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.progress-wrap:hover::before {
+	opacity: 1;
+}
+.progress-wrap svg path { 
+	fill: none; 
+}
+.progress-wrap svg.progress-circle path {
+	stroke: #fff;
+	stroke-width: 5;
+	box-sizing:border-box;
+	-webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+
+
+
+/**/
+.solutions-page h2{
+    font-weight: 700;
+}
+.solutions-page .container > div{
+    margin-bottom: 97px;
+}
+.solutions-page p{
+    color: #818181;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 38px;
+    margin-top: 24px;
+}
+.solutions-page .consultations .consultation p{
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.32px;
+}
+.solutions-page .consultations .consultation h3{
+    font-size: 24px;
+}
+.solutions-page .consultations .row{
+    margin-top: 64px;
+}
+
+
+.pagination{
+    gap: 20px;
+}
+.pagination .page-item{
+    width: 52px;
+    height: 52px;
+    color: #292F36;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 49px; /* 24px */
+    text-transform: capitalize;
+    transition: 0.2s ease-in-out;
+}
+.pagination .page-item.active, .pagination .page-item:hover{
+    background-color: #1280C4;
+    color: #fff;
+}
+
+@media(max-width:767px){
+    .solutions-page p{
+        font-size: 18px;
+    }
+    .solutions-page h2, .solutions-page h3{
+        font-size: 23px;
+    }
+    .pagination .page-item{
+        width: 35px;
+        font-size: 13px;
+        line-height: 32px; /* 24px */
+        height: 35px;
+    }
 }
