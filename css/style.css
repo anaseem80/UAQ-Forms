@@ -46,6 +46,25 @@
     src: url(../fonts/fa-thin-100.woff2) format("woff2"), url(../fonts/fa-thin-100.woff) format("woff"), url(../fonts/fa-thin-100.ttf) format("truetype")
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 :root{
     --font-size:32px;
     --text-color-black: #262A34;
@@ -672,6 +691,9 @@ form textarea:hover{
 }
 
 @media(max-width:767px){
+    .solutions-page .consultations .consultation img{
+        width: 80px;
+    }
     .solutions-page p{
         font-size: 18px;
     }
@@ -684,4 +706,56 @@ form textarea:hover{
         line-height: 32px; /* 24px */
         height: 35px;
     }
+    .dropdown-menu{
+        border: 0 !important;
+    }
 }
+
+.dropdown-item{
+    font-size: 15px !important;
+    transition: 0.2s ease-in-out;
+}
+@media (min-width: 200px) {
+    .animate {
+      animation-duration: 0.3s;
+      -webkit-animation-duration: 0.3s;
+      animation-fill-mode: both;
+      -webkit-animation-fill-mode: both;
+    }
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0rem);
+      opacity: 1;
+    }
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+  
+  @-webkit-keyframes slideIn {
+    0% {
+      -webkit-transform: transform;
+      -webkit-opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      -webkit-opacity: 1;
+    }
+    0% {
+      -webkit-transform: translateY(1rem);
+      -webkit-opacity: 0;
+    }
+  }
+  
+  .slideIn {
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+  }
+  
