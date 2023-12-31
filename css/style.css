@@ -107,7 +107,7 @@ header .swiper-slide h1{
 }
 @media(max-width:767px){
     .about-us .right-side{
-        padding:25px;
+        padding:40px 25px;
     }
     .header-top{
         margin-top: 89px;
