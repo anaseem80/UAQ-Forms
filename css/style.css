@@ -1,7 +1,4 @@
 @import url('https://fonts.cdnfonts.com/css/satoshi');
-h1,h2,h3,h4,h5{
-    color: ;
-}
 @font-face {
     font-family: "Font Awesome 6 Brands";
     font-style: normal;
@@ -110,7 +107,7 @@ header .swiper-slide h1{
 }
 @media(max-width:767px){
     .about-us .right-side{
-        padding:50px 15px;
+        padding:25px;
     }
     .header-top{
         margin-top: 89px;
@@ -202,6 +199,9 @@ header .swiper-slide h1{
 
 
 /* Footer */
+footer .text-wrap{
+    word-break: break-all;
+}
 footer .links p{
     color: #2E2F35;
     font-weight: 500;
@@ -241,7 +241,10 @@ footer .links a{
     display: block;
     position: relative;
 }
-footer a::before{
+.custom-link{
+    transition: 0.2s ease-in-out;
+}
+.custom-link::before{
     content: "";
     position: absolute;
     left: -15px;
@@ -251,10 +254,10 @@ footer a::before{
     transition: 0.2s ease-in-out;
     background-color: #2E2F35;
 }
-footer a:hover{
+.custom-link:hover{
     transform: translateX(15px);
 }
-footer a:hover::before{
+.custom-link:hover::before{
     width: 10px;
 }
 @media(max-width:767px){
@@ -282,7 +285,21 @@ footer a:hover::before{
 .breadcrumb{
     padding: 150px 0;
     background: linear-gradient(90deg, #ED6EA0 0%, #ED6EA0 0.01%, #EC8C69 100%);
+    background-size: 400% 400% !important;
+    animation: gradient 15s ease infinite;
 }
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 100%;
+	}
+}
+
 .breadcrumb > h1{
     font-size: 40px;
     font-style: normal;
@@ -467,7 +484,146 @@ footer a:hover::before{
 
 
 
+.cta{
+    background-color: #ECC1C1;
+}
+.cta button{
+    border: 1.365px solid #2E2F35;
+    box-shadow: 2.048px 2.048px 0px 0px #2E2F35;
+    color: #2E2F35;
+    text-align: center;
+    font-size: 8.875px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 13.653px; /* 153.846% */
+    letter-spacing: 0.819px;
+    text-transform: uppercase;
+}
+.cta h1{
+    font-size: 54px;
+    font-weight: 700;
+}
+.cta .rhs{
+    padding: 65px 0;
+}
+.cta p{
+    font-size: 14px;
+    font-weight: 400;
+}
+@media(max-width:767px){
+    .cta h1{
+        font-size: 40px;}
+}
+form select, 
+form input,
+form textarea{
+    outline: none;
+    transition: 0.2s ease-in-out;
+    color: #555;
+}
+form input::placeholder{
+    color: #555;
+}
+form input:focus, 
+form input:hover,
+form select:focus, 
+form select:hover,
+form textarea:focus,
+form textarea:hover{
+    border-bottom: 1px solid #016EB1 !important;
+}
 
+.contact-info{
+    padding: 100px;
+}
+.contact-info h1{
+    color: #274C5B;
+    font-weight: 700;
+}
+.contact-info p{
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 165.4% !important
+}
+.love-section .message-box h4{
+    color: #274C5B;
+    font-weight: 700;
+}
+.love-section .message-box{
+    border-radius: 16px;
+    filter: drop-shadow(0px 12px 19px rgba(201, 201, 201, 0.25));
+}
+.love-section .message-box a{
+    color: #525C60;
+    font-weight: 400;
+}
+.locations{
+    background-image: url(../images/contact2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    padding: 60px;
+}
+.locations .location h4{
+    color: #525C60;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+}
+.locations .location a{
+    color: #525C60;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 165.4%;
+}
+.locations .location p{
+    color: #525C60;
+    font-size: 14px;
+}
+.locations .locations-child{
+    padding: 46px 53px;
+}
+.locations .locations-child .title{
+    color: #7EB693;
+    font-size: 18px;
+    font-weight: 400;
+}
+.locations .locations-child .subtitle{
+    color: #525C60;
+    font-weight: 400;
+    font-size: 14px;
+    line-height:23.156px;
+}
+.quote input, .quote textarea, .quote select{
+    font-size: 20px;
+}
+@media (max-width:767px) {
+    .message-box h4, .love-section .message-box a, .locations .location h4{
+        font-size: 17px;
+    }
+    .locations .location a{
+        font-size: 12px;
+    }
+    .love-section .message-box .d-flex,
+    .love-section .message-box{
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    form input,select{
+        font-size: 14px !important;
+    }
+    .contact-info{
+        padding: 40px;
+    }
+    .locations .locations-child{
+        padding: 40px;
+    }
+    .locations{
+        padding: 20px;
+    }
+}
 /**/
 .solutions-page h2{
     font-weight: 700;
