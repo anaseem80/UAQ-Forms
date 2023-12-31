@@ -611,7 +611,7 @@ form textarea:hover{
         justify-content: center;
         text-align: center;
     }
-    form input,select{
+    .quote form input, .quote select, .quote textarea{
         font-size: 14px !important;
     }
     .contact-info{
