@@ -218,9 +218,7 @@ header .swiper-slide h1{
 
 
 /* Footer */
-footer .text-wrap{
-    word-break: break-all;
-}
+
 footer .links p{
     color: #2E2F35;
     font-weight: 500;
@@ -280,6 +278,9 @@ footer .links a{
     width: 10px;
 }
 @media(max-width:767px){
+    footer .text-wrap{
+        word-break: break-all;
+    }
     footer .links a{
         font-size: 13px;
     }
@@ -758,4 +759,40 @@ form textarea:hover{
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
   }
-  
+  .expertises{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 104px;
+  }
+  .expertise h3{
+    font-size: 32px;
+    color: #1C1D1D;
+  }
+  .expertise > div a{
+    font-size: 24px;
+    color: #1280C4;
+  }
+  .expertises .expertise .img-fluid{
+    width: 550px;
+    height: 550px;
+    object-fit: cover;
+  }
+
+  @media(max-width:992px) {
+      .expertises{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 05px;
+      }
+      .expertise h3{
+        font-size: 20px;
+        color: #1C1D1D;
+      }
+      .expertise > div a{
+        font-size: 18px;
+        color: #1280C4;
+      }
+      .expertises .expertise .arrow img{
+        width: 50px;
+        height: 50px;
+      }
+  }
