@@ -27,6 +27,11 @@
 
 	<!-- Ekka Custom -->
 	<script src="assets/js/ekka.js"></script>
+	<script>
+		if ( window.history.replaceState ) {
+			window.history.replaceState( null, null, window.location.href );
+		}
+	</script>
 </body>
 
 </html>

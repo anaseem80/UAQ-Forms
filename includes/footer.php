@@ -124,5 +124,10 @@
     </script>
     <script src="js/main.js"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.9/SmoothScroll.js"></script>
+    <script>
+		if ( window.history.replaceState ) {
+			window.history.replaceState( null, null, window.location.href );
+		}
+	</script>
 </body>
 </html>

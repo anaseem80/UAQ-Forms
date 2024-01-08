@@ -777,11 +777,19 @@ form textarea:hover{
     height: 550px;
     object-fit: cover;
   }
-
+  .clients{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 72px 20px;
+    flex-wrap: wrap;
+  }
   @media(max-width:992px) {
       .expertises{
         grid-template-columns: repeat(1, 1fr);
         gap: 05px;
+      }
+      .clients{
+        grid-template-columns: repeat(3, 1fr);
       }
       .expertise h3{
         font-size: 20px;
@@ -796,3 +804,10 @@ form textarea:hover{
         height: 50px;
       }
   }
+
+  @media(max-width:767px) {
+      .clients{
+        grid-template-columns: repeat(1, 1fr);
+      }
+  }
+

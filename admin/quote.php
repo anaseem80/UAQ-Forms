@@ -1,46 +1,15 @@
 <?php include 'includes/header.php' ?>
 
 <?php
-// Set vars to empty values
-$imageError = '';
-$success = '';
-
-// Form submit
-if (isset($_POST['submit'])) {
-    if (empty($_FILES['image']['name'])) {
-        $imageError = 'Image is required';
-    } else {
-        $image = $_FILES['image']['name'];
-
-        // Move the uploaded file to a designated folder
-        $targetDir = "../assets/uploads/";
-        $targetFilePath = $targetDir . basename($image);
-        move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
-    }
-
-    // SQL Insertion with prepared statement
-    if (empty($imageError)) {
-        $sql = "INSERT INTO gallery (image) VALUES ('$image')";
-        if (mysqli_query($conn, $sql)) {
-            $success = 'Image has been addedd successfully';
-        } else {
-          // error
-          echo 'Error: ' . mysqli_error($conn);
-        }
-    }
-}
-?>
-
-<?php
 // Handle image deletion
-if (isset($_POST['deleteImage'])) {
-    $imageIdToDelete = $_POST['imageId'];
+if (isset($_POST['deleteQuote'])) {
+    $quoteIdToDelete = $_POST['quoteId'];
     $success = '';
     // Perform the deletion from the database
-    $deleteSql = "DELETE FROM gallery WHERE id = '$imageIdToDelete'";
+    $deleteSql = "DELETE FROM quote WHERE id = '$quoteIdToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
         // header("Refresh:0");
-        $success = 'Image has been deleted successfully';
+        $success = 'Quote has been deleted successfully';
     } else {
         // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
@@ -49,9 +18,9 @@ if (isset($_POST['deleteImage'])) {
 ?>
 
 <?php 
-    $sql = 'SELECT * FROM gallery';
+    $sql = 'SELECT * FROM quote';
     $result = mysqli_query($conn, $sql);
-    $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $quote = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -62,12 +31,9 @@ if (isset($_POST['deleteImage'])) {
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Gallery</h1>
+                    <h1>Quote</h1>
                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                        <span><i class="mdi mdi-chevron-right"></i></span>Gallery</p>
-                </div>
-                <div>
-                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Image</a>
+                        <span><i class="mdi mdi-chevron-right"></i></span>quote</p>
                 </div>
             </div>
             <div class="row">
@@ -85,26 +51,36 @@ if (isset($_POST['deleteImage'])) {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Category</th>
+                                            <th>Company</th>
+                                            <th>Message</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php if(empty($gallery)): ?>
-                                            <?php elseif(!empty($gallery)): ?>
-                                                <?php foreach($gallery as $index => $item): ?>
+                                        <?php if(empty($quote)): ?>
+                                            <?php elseif(!empty($quote)): ?>
+                                                <?php foreach($quote as $index => $item): ?>
                                                 <tr>
                                                     <td><?php echo $index +1 ?></td>
-                                                    <td><img class="tbl-thumb" src="../assets/uploads/<?php echo $item['image']?>" alt="Product Image" /></td>
+                                                    <td><?php echo $item['name'] ?></td>
+                                                    <td><?php echo $item['email'] ?></td>
+                                                    <td><?php echo $item['phone'] ?></td>
+                                                    <td><?php echo $item['category'] ?></td>
+                                                    <td><?php echo $item['company'] ?></td>
+                                                    <td><?php echo $item['message'] ?></td>
                                                     <td class="text-center">
-                                                        <form method="post" action="" onsubmit="deleteImage()">
-                                                            <input type="hidden" name="imageId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteImage" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                        <form method="post" action="">
+                                                            <input type="hidden" name="quoteId" value="<?php echo $item['id']; ?>">
+                                                            <button type="submit" name="deleteQuote" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
-                                        <?php endforeach; ?>
+                                                <?php endforeach; ?>
                                         <?php endif; ?>
                                     </tbody>
                                 </table>

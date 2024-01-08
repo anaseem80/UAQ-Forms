@@ -48,12 +48,12 @@
 						<div class="collapse">
 							<ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
 								<li class="">
-									<a class="sidenav-item-link" href="main-category.html">
-										<span class="nav-text">Main Category</span>
+									<a class="sidenav-item-link" href="categories.php">
+										<span class="nav-text">Categories</span>
 									</a>
 								</li>
 								<li class="">
-									<a class="sidenav-item-link" href="sub-category.html">
+									<a class="sidenav-item-link" href="subcategory.php">
 										<span class="nav-text">Sub Category</span>
 									</a>
 								</li>
@@ -127,7 +127,7 @@
 
 					<!-- Reviews -->
 					<li>
-						<a class="sidenav-item-link" href="review-list.html">
+						<a class="sidenav-item-link" href="quote.php">
 							<i class="mdi mdi-star-half"></i>
 							<span class="nav-text">Quotes</span>
 						</a>

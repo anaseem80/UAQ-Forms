@@ -224,48 +224,25 @@
             <div class="position-relative mt-5">
                 <div class="swiper clients">
                     <div class="swiper-wrapper mt-5">
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/1.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/2.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/3.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/4.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/5.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/6.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/1.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/2.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/3.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/4.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/5.svg" alt="solution">
-                        </div>
-                        <div class="swiper-slide solution text-center" data-aos="fade-down">
-                            <img src="images/clients/6.svg" alt="solution">
-                        </div>
+                        <?php 
+                            $sql = 'SELECT * FROM gallery';
+                            $result = mysqli_query($conn, $sql);
+                            $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        ?>
+                        <?php if(empty($gallery)): ?>
+                        <?php elseif(!empty($gallery)): ?>
+                        <?php foreach($gallery as $index => $item): ?>
+                            <div class="swiper-slide solution text-center" data-aos="fade-down">
+                                <img src="../assets/uploads/<?php echo $item['image']?>" alt="solution">
+                            </div>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="swiper-button-next next-prev swiper-next-clients"></div>
                 <div class="swiper-button-prev next-prev swiper-prev-clients"></div>
             </div>
-            <div class="mt-5 text-center"><a href="#" class="btn text-primary-main fw-bold border-primary-main rounded-pill d-inline-block main-button">see more <i class="fa fa-arrow-right"></i></a></div>
+            <div class="mt-5 text-center"><a href="clients.php" class="btn text-primary-main fw-bold border-primary-main rounded-pill d-inline-block main-button">see more <i class="fa fa-arrow-right"></i></a></div>
         </div>
     </section>
   

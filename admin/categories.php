@@ -11,6 +11,8 @@ if (isset($_POST['submit'])) {
         $imageError = 'Image is required';
     } else {
         $image = $_FILES['image']['name'];
+        $name = $_POST['name'];
+        $title = $_POST['title'];
 
         // Move the uploaded file to a designated folder
         $targetDir = "../assets/uploads/";
@@ -20,9 +22,9 @@ if (isset($_POST['submit'])) {
 
     // SQL Insertion with prepared statement
     if (empty($imageError)) {
-        $sql = "INSERT INTO gallery (image) VALUES ('$image')";
+        $sql = "INSERT INTO categories (image, name, title) VALUES ('$image', '$name', '$title')";
         if (mysqli_query($conn, $sql)) {
-            $success = 'Image has been addedd successfully';
+            $success = 'Category has been addedd successfully';
         } else {
           // error
           echo 'Error: ' . mysqli_error($conn);
@@ -33,14 +35,14 @@ if (isset($_POST['submit'])) {
 
 <?php
 // Handle image deletion
-if (isset($_POST['deleteImage'])) {
-    $imageIdToDelete = $_POST['imageId'];
+if (isset($_POST['deleteCategory'])) {
+    $CategoryToDelete = $_POST['CategoryId'];
     $success = '';
     // Perform the deletion from the database
-    $deleteSql = "DELETE FROM gallery WHERE id = '$imageIdToDelete'";
+    $deleteSql = "DELETE FROM categories WHERE id = '$CategoryToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
         // header("Refresh:0");
-        $success = 'Image has been deleted successfully';
+        $success = 'Category has been deleted successfully';
     } else {
         // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
@@ -49,9 +51,9 @@ if (isset($_POST['deleteImage'])) {
 ?>
 
 <?php 
-    $sql = 'SELECT * FROM gallery';
+    $sql = 'SELECT * FROM categories';
     $result = mysqli_query($conn, $sql);
-    $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -62,12 +64,12 @@ if (isset($_POST['deleteImage'])) {
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Gallery</h1>
+                    <h1>Categories</h1>
                     <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                        <span><i class="mdi mdi-chevron-right"></i></span>Gallery</p>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Categories</p>
                 </div>
                 <div>
-                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Image</a>
+                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage">Add Category</a>
                 </div>
             </div>
             <div class="row">
@@ -85,22 +87,26 @@ if (isset($_POST['deleteImage'])) {
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
                                             <th>Image</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php if(empty($gallery)): ?>
-                                            <?php elseif(!empty($gallery)): ?>
-                                                <?php foreach($gallery as $index => $item): ?>
+                                        <?php if(empty($categories)): ?>
+                                            <?php elseif(!empty($categories)): ?>
+                                                <?php foreach($categories as $index => $item): ?>
                                                 <tr>
                                                     <td><?php echo $index +1 ?></td>
+                                                    <td><?php echo $item['name']?></td>
+                                                    <td><?php echo $item['title']?></td>
                                                     <td><img class="tbl-thumb" src="../assets/uploads/<?php echo $item['image']?>" alt="Product Image" /></td>
                                                     <td class="text-center">
-                                                        <form method="post" action="" onsubmit="deleteImage()">
-                                                            <input type="hidden" name="imageId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteImage" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                        <form method="post" action="">
+                                                            <input type="hidden" name="CategoryId" value="<?php echo $item['id']; ?>">
+                                                            <button type="submit" name="deleteCategory" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -120,15 +126,24 @@ if (isset($_POST['deleteImage'])) {
     <div class="modal-dialog">
         <form class="modal-content" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
         <div class="modal-header">
-            <h5 class="modal-title" id="AddImageLabel">Add Image</h5>
+            <h5 class="modal-title" id="AddImageLabel">Add Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="row ec-vendor-uploads">
                 <div class="col-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter title here" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Description</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter title here" id="title" required>
+                    </div>
                     <div class="ec-vendor-img-upload">
                         <div class="ec-vendor-main-img">
                             <div class="avatar-upload">
+                            <label for="imageUpload">Image</label>
                                 <div class="avatar-edit">
                                     <input type='file' id="imageUpload" name="image" class="ec-image-upload"
                                         accept=".png, .jpg, .jpeg" required/>
@@ -158,12 +173,6 @@ if (isset($_POST['deleteImage'])) {
     </div>
 
 <?php include 'includes/footer.php' ?>
-<script>
-    function deleteImage(){
-        event.preventDefault();
-        console.log("deleted")
-    }
-</script>
 <script src='assets/plugins/data-tables/jquery.datatables.min.js'></script>
 <script src='assets/plugins/data-tables/datatables.bootstrap5.min.js'></script>
 <script src='assets/plugins/data-tables/datatables.responsive.min.js'></script>

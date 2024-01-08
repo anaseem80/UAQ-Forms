@@ -3,6 +3,7 @@
 <?php
 // Set vars to empty values
 $imageError = '';
+$success = '';
 
 // Form submit
 if (isset($_POST['submit'])) {
@@ -21,7 +22,7 @@ if (isset($_POST['submit'])) {
     if (empty($imageError)) {
         $sql = "INSERT INTO clients (image) VALUES ('$image')";
         if (mysqli_query($conn, $sql)) {
-            // header("Refresh:0");
+            $success = 'Client has been addedd successfully';
         } else {
           // error
           echo 'Error: ' . mysqli_error($conn);
@@ -34,12 +35,12 @@ if (isset($_POST['submit'])) {
 // Handle image deletion
 if (isset($_POST['deleteImage'])) {
     $imageIdToDelete = $_POST['imageId'];
-
+    $success = '';
     // Perform the deletion from the database
     $deleteSql = "DELETE FROM clients WHERE id = '$imageIdToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
         // header("Refresh:0");
-
+        $success = 'Client has been deleted successfully';
     } else {
         // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
@@ -66,13 +67,18 @@ if (isset($_POST['deleteImage'])) {
                         <span><i class="mdi mdi-chevron-right"></i></span>Clients</p>
                 </div>
                 <div>
-                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Image</a>
+                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Client</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-default">
                         <div class="card-body">
+                            <?php if(!empty($success)): ?>
+                                <div class="alert alert-success" role="alert">
+                                <?php echo $success?>
+                                </div>
+                            <?php endif; ?>
                             <div class="table-responsive">
                                 <table id="responsive-data-table" class="table"
                                     style="width:100%">
