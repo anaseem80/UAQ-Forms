@@ -60,7 +60,7 @@
             <div class="col-lg-9 col-11 m-auto" data-aos="fade-right">
                 <h1>ABOUT US</h1>
                 <p>
-                    Since 1989 Computer Forms has been proudly serving customers in the printing and packaging industry with over 30 years of experience and team of experts that are dedicated to delivering custom solutions that meet the specific needs of each customer. No matter the size or complexity of the project our team takes your vision and turns it into reality. Together, let us continue to create, to inspire, and to make a difference.
+                    <?php echo $settings['about'] ?>
                 </p>
                 <a href="#" class="btn bg-primary-main text-light rounded-pill d-inline-block main-button">read more <i class="fa fa-arrow-right"></i></a>
             </div>

@@ -19031,7 +19031,7 @@ code {
 }
 .sign-inup .ec-brand a img {
   width: 100px;
-  max-width: 100px;
+  /* max-width: 100px; */
 }
 
 .sign-upp {
@@ -21008,7 +21008,7 @@ div.copied {
   position: relative;
 }
 .sidebar .sidebar-inner > li > a {
-  padding: 15px 25px;
+  padding: 11px 25px;
   line-height: 20px;
   color: #a6aab4;
   display: block;
@@ -21016,6 +21016,7 @@ div.copied {
   text-transform: uppercase;
   font-weight: 400;
   white-space: nowrap;
+  font-size: 12px;
 }
 .sidebar .sidebar-inner .collapse.show {
   width: 100%;
@@ -21074,13 +21075,14 @@ div.copied {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 70px;
+  /* height: 70px; */
+  justify-content: center;
   line-height: 75px;
   width: 250px;
-  border-bottom: 1px solid #f3f3f3;
+  /* border-bottom: 1px solid #f3f3f3; */
   -webkit-transition: width 0.3s ease-in-out;
   transition: width 0.3s ease-in-out;
-  padding-left: 1.56rem;
+  margin: 25px 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .ec-brand a {
@@ -21090,11 +21092,11 @@ div.copied {
 }
 @media (min-width: 768px) {
   .ec-brand a {
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 }
 .ec-brand a img {
-  max-width: 30px;
+  /* max-width: 30px; */
   vertical-align: middle;
 }
 .ec-brand .ec-brand-name {
@@ -21113,7 +21115,7 @@ div.copied {
   width: 20px;
   text-align: center;
   line-height: 20px;
-  font-size: 1.5rem;
+  font-size: 17px;
 }
 
 .sidebar .nav > li.active > a i {
@@ -21227,6 +21229,8 @@ div.copied {
   max-width: 130px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 500;
+  color: #fff;
 }
 .sidebar .sidenav-item-link .badge {
   padding: 0.4em 0.6em;

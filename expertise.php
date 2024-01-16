@@ -5,8 +5,11 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM sub_categories WHERE category_id = '$categoryId'";
     $result = mysqli_query($conn, $sql);
     $sub_categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    if(empty($sub_categories)){
+        header("Location: expertises.php");
+    }
 }else {
-
+    header("Location: expertises.php");
 }
   
 ?>
@@ -16,8 +19,11 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM categories WHERE id = '$categoryId'";
     $result = mysqli_query($conn, $sql);
     $category = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    if(empty($sub_categories)){
+        header("Location: expertises.php");
+    }
 }else {
-
+    header("Location: expertises.php");
 }
   
 ?>
@@ -36,6 +42,7 @@ if (isset($_GET['id'])) {
             </div>
             <div class="expertises mt-5">
             <?php if(empty($sub_categories)): ?>
+                
                 <?php elseif(!empty($sub_categories)): ?>
                 <?php foreach($sub_categories as $index => $item): ?>
                     <div class="expertise">

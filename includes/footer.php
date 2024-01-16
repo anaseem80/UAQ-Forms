@@ -7,7 +7,7 @@
                             <p class="mb-5">At Computer forms one way to showcase the company’s success to our team members, partners and customers is by following to our core values<p>
                         </div>
                         <div class="col-12 m-lg-0 mb-3 order-lg-2 order-1">
-                            <img src="images/logo.png" class="mt-2" alt="logo" width="127" height="92">
+                            <img src="../assets/uploads/<?php echo $settings['logo'] ?>" class="mt-2" alt="logo" width="127" height="92">
                         </div>
                     </div>
                 </div>
@@ -16,21 +16,21 @@
                         <div class="col-lg-6 m-lg-0 mb-3">
                             <p class="head">Company</p>
                             <ul class="list-unstyled">
-                                <li><a class="custom-link" href="index.html">Home</a></li>
-                                <li><a class="custom-link" href="expertises.html">Expertise</a></li>
-                                <li><a class="custom-link" href="gellary.html">Gallery</a></li>
-                                <li><a class="custom-link" href="quote.html">Get Quote</a></li>
-                                <li><a class="custom-link" href="contact-us.html">Contact Us</a></li>
+                                <li><a class="custom-link" href="/">Home</a></li>
+                                <li><a class="custom-link" href="expertises.php">Expertise</a></li>
+                                <li><a class="custom-link" href="gellary.php">Gallery</a></li>
+                                <li><a class="custom-link" href="quote.php">Get Quote</a></li>
+                                <li><a class="custom-link" href="contact-us.php">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-6 m-lg-0 mb-3">
                             <div class="links">
                                 <p class="head">Solutions</p>
                                 <ul class="list-unstyled">
-                                    <li><a class="custom-link" href="consultation.html">Consultation</a></li>
-                                    <li><a class="custom-link" href="collaboration.html">Collaboration</a></li>
-                                    <li><a class="custom-link" href="quality.html">Quality Assurance</a></li>
-                                    <li><a class="custom-link" href="sustainability.html">Sustainability</a></li>
+                                    <li><a class="custom-link" href="consultation.php">Consultation</a></li>
+                                    <li><a class="custom-link" href="collaboration.php">Collaboration</a></li>
+                                    <li><a class="custom-link" href="quality.php">Quality Assurance</a></li>
+                                    <li><a class="custom-link" href="sustainability.php">Sustainability</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -5,8 +5,11 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM sub_categories WHERE id = '$categoryId'";
     $result = mysqli_query($conn, $sql);
     $sub_category = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    if(empty($sub_category)){
+        header("Location: expertise.php");
+    }
 }else {
-
+    header("Location: expertise.php");
 }
   
 ?>
@@ -17,7 +20,7 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($conn, $sql);
     $category = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }else {
-
+    header("Location: expertise.php");
 }
   
 ?>

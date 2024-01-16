@@ -1,4 +1,9 @@
-<?php include './config/db.php'?>
+<?php 
+include './config/db.php';
+$sql = 'SELECT * FROM settings WHERE id = 1';
+$result = mysqli_query($conn, $sql);
+$settings = mysqli_fetch_assoc($result);
+?>
 
 
 <!DOCTYPE html>
@@ -9,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/uploads/<?php echo $settings['logo'] ?>" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>UAQ Forms - Home</title>
 </head>
@@ -21,7 +26,7 @@
 	</div>
     <nav class="navbar navbar-expand-xl navbar-light bg-white fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" width="68" height="49"></a>
+            <a class="navbar-brand" href="#"><img src="../assets/uploads/<?php echo $settings['logo'] ?>" alt="logo" width="68" height="49"></a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>

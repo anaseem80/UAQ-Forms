@@ -1,5 +1,10 @@
 <?php include '../config/db.php'?>
+<?php 
+$sql = 'SELECT * FROM settings WHERE id = 1';
+$result = mysqli_query($conn, $sql);
+$settings = mysqli_fetch_assoc($result);
 
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -26,11 +31,11 @@
 	<link id="ekka-css" href="assets/css/ekka.css" rel="stylesheet" />
 
 	<!-- FAVICON -->
-	<link href="assets/img/favicon.png" rel="shortcut icon" />
+	<link href="../assets/uploads/<?php echo $settings['logo'] ?>"  rel="shortcut icon" />
     <script src="https://kit.fontawesome.com/5488d9796f.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-light" id="body">
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-dark" id="body">
 <div class="wrapper">
 	
 	<?php include 'includes/sidebar.php' ?>

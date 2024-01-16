@@ -4,8 +4,7 @@
 
 			<div class="ec-brand">
 				<a href="index.php" title="Ekka">
-					<img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" />
-					<span class="ec-brand-name text-truncate">Ekka</span>
+					<img class="ec-brand-icon" src="../assets/uploads/<?php echo $settings['logo'] ?>" width="127" height="92" alt="" />
 				</a>
 			</div>
 
@@ -131,6 +130,7 @@
 							<i class="mdi mdi-star-half"></i>
 							<span class="nav-text">Quotes</span>
 						</a>
+						<hr>
 					</li>
 
 					<!-- Brands -->
@@ -141,7 +141,12 @@
 						</a>
 						<hr>
 					</li> -->
-
+					<li>
+						<a class="sidenav-item-link" href="settings.php">
+							<i class="mdi mdi-settings"></i>
+							<span class="nav-text">Settings</span>
+						</a>
+					</li>
 					<!-- Authentication -->
 					<!-- <li class="has-sub">
 						<a class="sidenav-item-link" href="javascript:void(0)">
