@@ -1,7 +1,6 @@
 <?php include 'includes/header.php' ?>
 
 <?php
-// Set vars to empty values
 $imageError = '';
 $success = '';
 
@@ -14,37 +13,34 @@ if (isset($_POST['submit'])) {
         $name = $_POST['name'];
         $title = $_POST['title'];
 
-        // Move the uploaded file to a designated folder
         $targetDir = "../assets/uploads/";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
     }
 
-    // SQL Insertion with prepared statement
     if (empty($imageError)) {
-        $sql = "INSERT INTO categories (image, name, title) VALUES ('$image', '$name', '$title')";
-        if (mysqli_query($conn, $sql)) {
-            $success = 'Category has been addedd successfully';
+        $sql = "INSERT INTO categories (image, name, title) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sss', $image, $name, $title);
+
+        if (mysqli_stmt_execute($stmt)) {
+            $success = 'Category has been added successfully';
         } else {
-          // error
-          echo 'Error: ' . mysqli_error($conn);
+            echo 'Error: ' . mysqli_stmt_error($stmt);
         }
+
+        mysqli_stmt_close($stmt);
     }
 }
 ?>
-
 <?php
-// Handle image deletion
 if (isset($_POST['deleteCategory'])) {
     $CategoryToDelete = $_POST['CategoryId'];
     $success = '';
-    // Perform the deletion from the database
     $deleteSql = "DELETE FROM categories WHERE id = '$CategoryToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
-        // header("Refresh:0");
         $success = 'Category has been deleted successfully';
     } else {
-        // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
     }
 }
@@ -65,7 +61,7 @@ if (isset($_POST['deleteCategory'])) {
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
                     <h1>Categories</h1>
-                    <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                    <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
                         <span><i class="mdi mdi-chevron-right"></i></span>Categories</p>
                 </div>
                 <div>

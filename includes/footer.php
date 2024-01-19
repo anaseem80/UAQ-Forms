@@ -7,7 +7,7 @@
                             <p class="mb-5">At Computer forms one way to showcase the company’s success to our team members, partners and customers is by following to our core values<p>
                         </div>
                         <div class="col-12 m-lg-0 mb-3 order-lg-2 order-1">
-                            <img src="../assets/uploads/<?php echo $settings['logo'] ?>" class="mt-2" alt="logo" width="127" height="92">
+                            <a href="/"><img src="../assets/uploads/<?php echo $settings['logo'] ?>" class="mt-2" alt="logo" width="127" height="92"></a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
             spaceBetween: 30,
             effect: "fade",
             loop:true,
-            autoplay: true,
+            // autoplay: true,
         });
         var swiper = new Swiper(".solutions", {
             slidesPerView: 4,

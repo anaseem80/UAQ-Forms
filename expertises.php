@@ -6,7 +6,7 @@
 ?>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background-image: var(--Gradient-Colors-G_14, linear-gradient(90deg, #48C6EF 0%, #6F86D6 100%))">
         <h1 class="text-light" data-aos="fade-up">Print <span>Expertise</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto position-absolute" data-aos="fade-right">
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
             <h1>Expertise</h1>
             <h5>Home / Expertise</h5>
         </div>
@@ -28,7 +28,7 @@
                     <a href="expertise.php?id=<?php echo $item['id']?>"> <img src="../assets/uploads/<?php echo $item['image']?>" class="img-fluid w-100" alt="expertise"></a>
                     <div class="d-flex justify-content-between mt-4 align-items-center">
                         <div>
-                            <a href="view.html" class="text-decoration-none"><h3><?php echo $item['name']?></h3></a>
+                            <a href="expertise.php?id=<?php echo $item['id']?>" class="text-decoration-none"><h3><?php echo $item['name']?></h3></a>
                             <a href="expertise.php?id=<?php echo $item['id']?>" class="text-decoration-none position-relative custom-link d-block">See More</a>
                         </div>
                         <div><a href="expertise.php?id=<?php echo $item['id']?>" class="arrow"><img src="images/expertise/arrow.svg" width="70" height="70" alt="arrow"></a></div>

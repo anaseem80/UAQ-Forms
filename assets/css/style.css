@@ -303,10 +303,10 @@ footer .links a{
 /* Footer */
 
 .breadcrumb{
-    padding: 150px 0;
+    padding: 150px 0 0;
     background: linear-gradient(90deg, #ED6EA0 0%, #ED6EA0 0.01%, #EC8C69 100%);
     background-size: 400% 400% !important;
-    animation: gradient 15s ease infinite;
+    animation: gradient 4s ease infinite;
 }
 @keyframes gradient {
 	0% {
@@ -334,12 +334,13 @@ footer .links a{
     display: flex;
     width: 431.143px;
     padding: 41px 158px;
+    transform: translateY(31px) !important;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    bottom: -100px;
+    /* bottom: -100px;
     right: 0;
-    left: 0;
+    left: 0; */
 }
 .breadcrumb .box h1{
     font-size: 50px;
@@ -578,7 +579,7 @@ form textarea:hover{
     font-weight: 400;
 }
 .locations{
-    background-image: url(../images/contact2.jpg);
+    background-image: url(../../images/contact2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -783,10 +784,13 @@ form textarea:hover{
     gap: 72px 20px;
     flex-wrap: wrap;
   }
+  .dropdown-item{
+    background: #F4F4F4;
+  }
   @media(max-width:992px) {
       .expertises{
         grid-template-columns: repeat(1, 1fr);
-        gap: 05px;
+        gap: 47px;
       }
       .clients{
         grid-template-columns: repeat(3, 1fr);
@@ -805,9 +809,27 @@ form textarea:hover{
       }
   }
 
+  .image-slider{
+    height: 500px;
+    width: 100%;
+  }
   @media(max-width:767px) {
-      .clients{
+    .clients{
         grid-template-columns: repeat(1, 1fr);
-      }
+    }
+    .image-slider{
+        height: 370px;
+        width: 100%;
+    }
+    header .swiper-slide{
+        height: 600px;
+    }
   }
 
+
+  .header-top .swiper-slide{
+    opacity: 0 !important;
+  }
+  .header-top .swiper-slide-active{
+    opacity: 1 !important;
+  }

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 ?>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
         <h1 class="text-light" data-aos="fade-up">Online <span>Quote</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto position-absolute" data-aos="fade-right">
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
             <h1>Quote</h1>
             <h5>Home / Quote</h5>
         </div>
@@ -46,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <div class="cta p-xl-0 p-4">
             <div class="container">
                 <div class="row mb-0">
-                    <div class="col-xl-6 col-md-12 text-light rhs" data-aos="fade-down">
+                    <div class="col-xl-5 col-md-12 text-light rhs" data-aos="fade-down">
                         <h1>Get a Quote for Your requirements</h1>
                         <p class="text-light">Tell us about your requirements and we’ll get back
                             to you with a quote.</p>
                         <button class="btn btn-light rounded-0 py-2 px-3">GET STARTED</button>
                     </div>
-                    <div class="col-xl-6 col-md-12 d-xl-block d-none"><img src="images/cta.png" class="img-fluid h-100 object-cover" alt="cta"></div>
+                    <div class="col-xl-7 col-md-12 d-xl-block d-none"><img src="images/cta.png" class="img-fluid h-100 object-cover" alt="cta"></div>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         <input type="tel" class="border-bottom border-0 pb-2 w-100 outline-none" name="phone" placeholder="Phone Number" required>
                     </div>
                     <div class="col-lg-12 mt-5 form-group">
-                        <select name="category" class="border-bottom border-0 pb-2 w-100 outline-none" id="category" required>
+                        <select name="category" class="border-bottom border-0 pb-2 w-100 outline-none" style="background-color: transparent;" id="category" required>
                         <option selected disabled>Select Category</option>
                             <?php if(empty($categories)): ?>
                                 <?php elseif(!empty($categories)): ?>

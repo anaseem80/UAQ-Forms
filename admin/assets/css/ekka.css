@@ -2074,6 +2074,9 @@ progress {
     --bs-gutter-y: 5rem;
   }
 }
+.ec-left-sidebar {
+  background-color: #1a283e !important;
+}
 .table {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
@@ -21856,8 +21859,9 @@ div.copied {
 
 /* Sidebar Light */
 .ec-sidebar-light .ec-left-sidebar {
-  background-color: #ffffff;
+  background-color: #1a283e;
 }
+
 .ec-sidebar-light .sidebar {
   border-right: 1px solid #f3f3f3;
 }

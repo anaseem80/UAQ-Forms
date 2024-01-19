@@ -1,8 +1,8 @@
 <?php
-define('DB_HOST', 'sikkatbeirutcom.ipagemysql.com'); // 'localhost'
-define('DB_USER', 'uaqforms');  // 'root'
-define('DB_PASS', 'Root@123456'); // ''
-define('DB_NAME', 'uaqforms'); // 'uaq-forms'
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'uaq-forms');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 

@@ -35,7 +35,7 @@ $settings = mysqli_fetch_assoc($result);
     <script src="https://kit.fontawesome.com/5488d9796f.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-dark" id="body">
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
 <div class="wrapper">
 	
 	<?php include 'includes/sidebar.php' ?>

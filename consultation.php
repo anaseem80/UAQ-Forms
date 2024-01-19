@@ -2,9 +2,9 @@
 
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
         <h1 class="text-light" data-aos="fade-up">Our <span>Solutions</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto position-absolute" data-aos="fade-right">
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
             <h1>Solutions</h1>
-            <h5>Home / Solutions</h5>
+            <h5>Home / Solutions / Consultation</h5>
         </div>
     </div>
 

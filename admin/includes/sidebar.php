@@ -12,18 +12,11 @@
 			<div class="ec-navigation" data-simplebar>
 				<!-- sidebar menu -->
 				<ul class="nav sidebar-inner" id="sidebar-menu">
-					<!-- Dashboard -->
-					<li>
-						<a class="sidenav-item-link" href="index.php">
-							<i class="mdi mdi-view-dashboard-outline"></i>
-							<span class="nav-text">Dashboard</span>
-						</a>
-						<hr>
-					</li>
+
 
 					<!-- Vendors -->
 					<li>
-						<a class="sidenav-item-link" href="clients.php">
+						<a class="sidenav-item-link" href="index.php">
 							<i class="mdi mdi-account-group-outline"></i>
 							<span class="nav-text">Clients</span>
 						</a>
@@ -129,6 +122,13 @@
 						<a class="sidenav-item-link" href="quote.php">
 							<i class="mdi mdi-star-half"></i>
 							<span class="nav-text">Quotes</span>
+						</a>
+						<hr>
+					</li>
+					<li>
+						<a class="sidenav-item-link" href="slider.php">
+							<i class="mdi mdi-star-half"></i>
+							<span class="nav-text">Sliders</span>
 						</a>
 						<hr>
 					</li>

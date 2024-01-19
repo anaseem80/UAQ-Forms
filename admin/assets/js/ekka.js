@@ -20,7 +20,7 @@
 
 $(document).ready(function () {
   "use strict";
-
+  $("body").addClass("ec-sidebar-dark").removeClass("ec-sidebar-light")
   /*======== SCROLLBAR SIDEBAR ========*/
   var sidebarScrollbar = $(".sidebar-scrollbar");
   if (sidebarScrollbar.length != 0) {

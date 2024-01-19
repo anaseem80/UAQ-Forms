@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
 
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background-image: var(--Gradient-Colors-G_14, linear-gradient(90deg, #48C6EF 0%, #6F86D6 100%))">
         <h1 class="text-light" data-aos="fade-up">Print <span>Expertise</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto position-absolute" data-aos="fade-right">
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
             <h1><?php echo $sub_category[0]['title']?></h1>
             <h5>Home / Expertise / <?php echo $category[0]['name']?> / <?php echo $sub_category[0]['title']?></h5>
         </div>

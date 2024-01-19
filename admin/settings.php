@@ -1,22 +1,15 @@
 <?php include 'includes/header.php' ?>
 
 <?php
-// Assuming you have a database connection established ($conn)
 $success = '';
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle the form submission
-
-    // Check if a file is selected
     if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] == 0) {
         $logoFileName = $_FILES["logo"]["name"];
         $logoTmpName = $_FILES["logo"]["tmp_name"];
-        
-        // Move the uploaded file to the desired directory
         $uploadDirectory = "../assets/uploads/";
         move_uploaded_file($logoTmpName, $uploadDirectory . $logoFileName);
 
-        // Update the database with the new logo filename
         $newLogoFileName = mysqli_real_escape_string($conn, $logoFileName);
         $updateSql = "UPDATE settings SET logo = '$newLogoFileName' WHERE id = 1";
         $updateResult = mysqli_query($conn, $updateSql);
@@ -28,12 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Check if 'about' content is submitted
     if (isset($_POST['about'])) {
-        // Sanitize and escape the input to prevent SQL injection
         $newAbout = mysqli_real_escape_string($conn, $_POST['about']);
 
-        // Update the database with the new 'about' content
         $updateSql = "UPDATE settings SET about = '$newAbout' WHERE id = 1";
         $updateResult = mysqli_query($conn, $updateSql);
 
@@ -44,12 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-// Fetch the current settings for initial display
 $sql = 'SELECT * FROM settings WHERE id = 1';
 $result = mysqli_query($conn, $sql);
 $settings = mysqli_fetch_assoc($result);
 
-// Close the database connection
 mysqli_close($conn);
 ?>
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -61,7 +49,7 @@ mysqli_close($conn);
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
                     <h1>Settings</h1>
-                    <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                     <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
                         <span><i class="mdi mdi-chevron-right"></i></span>settings</p>
                 </div>
             </div>

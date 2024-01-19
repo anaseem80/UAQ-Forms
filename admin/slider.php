@@ -5,26 +5,25 @@
 $imageError = '';
 $success = '';
 
-// Form submit
 if (isset($_POST['submit'])) {
     if (empty($_FILES['image']['name'])) {
         $imageError = 'Image is required';
     } else {
         $image = $_FILES['image']['name'];
+        $title = $_POST['title'];
+        $title2 = $_POST['title2'];
+        $color = $_POST['color'];
 
-        // Move the uploaded file to a designated folder
         $targetDir = "../assets/uploads/";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
     }
 
-    // SQL Insertion with prepared statement
     if (empty($imageError)) {
-        $sql = "INSERT INTO clients (image) VALUES ('$image')";
+        $sql = "INSERT INTO sliders (image, title, title2, color) VALUES ('$image', '$title', '$title2', '$color')";
         if (mysqli_query($conn, $sql)) {
-            $success = 'Client has been addedd successfully';
+            $success = 'Slider has been addedd successfully';
         } else {
-          // error
           echo 'Error: ' . mysqli_error($conn);
         }
     }
@@ -32,26 +31,22 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php
-// Handle image deletion
-if (isset($_POST['deleteImage'])) {
-    $imageIdToDelete = $_POST['imageId'];
+if (isset($_POST['deletSlider'])) {
+    $sliderToDelete = $_POST['sliderId'];
     $success = '';
-    // Perform the deletion from the database
-    $deleteSql = "DELETE FROM clients WHERE id = '$imageIdToDelete'";
+    $deleteSql = "DELETE FROM sliders WHERE id = '$sliderToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
-        // header("Refresh:0");
-        $success = 'Client has been deleted successfully';
+        $success = 'Slider has been deleted successfully';
     } else {
-        // Error in deletion
-        echo "Error deleting image: " . mysqli_error($conn);
+        echo "Error deleting slider: " . mysqli_error($conn);
     }
 }
 ?>
 
 <?php 
-    $sql = 'SELECT * FROM clients';
+    $sql = 'SELECT * FROM sliders';
     $result = mysqli_query($conn, $sql);
-    $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $sliders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -62,12 +57,12 @@ if (isset($_POST['deleteImage'])) {
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Clients</h1>
-                    <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                        <span><i class="mdi mdi-chevron-right"></i></span>Clients</p>
+                    <h1>Sliders</h1>
+                     <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Sliders</p>
                 </div>
                 <div>
-                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Client</a>
+                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Slider</a>
                 </div>
             </div>
             <div class="row">
@@ -85,22 +80,28 @@ if (isset($_POST['deleteImage'])) {
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Title</th>
+                                            <th>Sub Title</th>
+                                            <th>Color HEX</th>
                                             <th>Image</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php if(empty($clients)): ?>
-                                            <?php elseif(!empty($clients)): ?>
-                                                <?php foreach($clients as $index => $item): ?>
+                                        <?php if(empty($sliders)): ?>
+                                            <?php elseif(!empty($sliders)): ?>
+                                                <?php foreach($sliders as $index => $item): ?>
                                                 <tr>
                                                     <td><?php echo $index +1 ?></td>
+                                                    <td><?php echo $item['title']?></td>
+                                                    <td><?php echo $item['title2']?></td>
+                                                    <td><?php echo $item['color']?></td>
                                                     <td><img class="tbl-thumb" src="../assets/uploads/<?php echo $item['image']?>" alt="Product Image" /></td>
                                                     <td class="text-center">
-                                                        <form method="post" action="" onsubmit="deleteImage()">
-                                                            <input type="hidden" name="imageId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteImage" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                        <form method="post" action="" onsubmit="deletSlider()">
+                                                            <input type="hidden" name="sliderId" value="<?php echo $item['id']; ?>">
+                                                            <button type="submit" name="deletSlider" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -125,6 +126,18 @@ if (isset($_POST['deleteImage'])) {
         </div>
         <div class="modal-body">
             <div class="row ec-vendor-uploads">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter title here" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="title2">Title 2</label>
+                    <input type="text" name="title2" class="form-control" placeholder="Enter title here" id="title2" required>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="color" name="color" class="form-control" placeholder="Enter title here" id="color" required>
+                </div>
                 <div class="col-12">
                     <div class="ec-vendor-img-upload">
                         <div class="ec-vendor-main-img">

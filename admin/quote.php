@@ -1,17 +1,13 @@
 <?php include 'includes/header.php' ?>
 
 <?php
-// Handle image deletion
 if (isset($_POST['deleteQuote'])) {
     $quoteIdToDelete = $_POST['quoteId'];
     $success = '';
-    // Perform the deletion from the database
     $deleteSql = "DELETE FROM quote WHERE id = '$quoteIdToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
-        // header("Refresh:0");
         $success = 'Quote has been deleted successfully';
     } else {
-        // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
     }
 }
@@ -32,7 +28,7 @@ if (isset($_POST['deleteQuote'])) {
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
                     <h1>Quote</h1>
-                    <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                     <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
                         <span><i class="mdi mdi-chevron-right"></i></span>quote</p>
                 </div>
             </div>

@@ -26,7 +26,7 @@ $settings = mysqli_fetch_assoc($result);
 	</div>
     <nav class="navbar navbar-expand-xl navbar-light bg-white fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="../assets/uploads/<?php echo $settings['logo'] ?>" alt="logo" width="68" height="49"></a>
+            <a class="navbar-brand" href="/"><img src="../assets/uploads/<?php echo $settings['logo'] ?>" alt="logo" width="68" height="49"></a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,11 +36,11 @@ $settings = mysqli_fetch_assoc($result);
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="expertises.php">Expertise</a> </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" aria-current="page" href="javascript:void(0)" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Solutions</a> 
-                    <ul class="dropdown-menu animate slideIn border-0 border-top shadow-sm rounded-0 p-0" aria-labelledby="dropdownMenuButton1">
-                        <li><a href="consultation.php" class="dropdown-item py-2 border-bottom">Consultation</a></li>
-                        <li><a href="collaboration.php" class="dropdown-item py-2 border-bottom">Collaboration</a></li>
-                        <li><a href="quality.php" class="dropdown-item py-2 border-bottom">Quality Assurance</a></li>
-                        <li><a href="sustainability.php" class="dropdown-item py-2 border-bottom">Sustainability</a></li>
+                    <ul class="dropdown-menu animate slideIn border-0 shadow-sm rounded-0 p-0" aria-labelledby="dropdownMenuButton1">
+                        <li><a href="consultation.php" class="dropdown-item py-3 px-5 text-center">Consultation</a></li>
+                        <li><a href="collaboration.php" class="dropdown-item py-3 px-5 text-center">Collaboration</a></li>
+                        <li><a href="quality.php" class="dropdown-item py-3 px-5 text-center">Quality Assurance</a></li>
+                        <li><a href="sustainability.php" class="dropdown-item py-3 px-5 text-center">Sustainability</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="gellary.php">Gallery</a> </li>

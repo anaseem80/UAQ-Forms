@@ -1,30 +1,25 @@
 <?php include 'includes/header.php' ?>
 
 <?php
-// Set vars to empty values
 $imageError = '';
 $success = '';
 
-// Form submit
 if (isset($_POST['submit'])) {
     if (empty($_FILES['image']['name'])) {
         $imageError = 'Image is required';
     } else {
         $image = $_FILES['image']['name'];
 
-        // Move the uploaded file to a designated folder
-        $targetDir = "../assets/uploads/";
+        $targetDir = "../assets/uploads/gellary";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
     }
 
-    // SQL Insertion with prepared statement
     if (empty($imageError)) {
         $sql = "INSERT INTO gallery (image) VALUES ('$image')";
         if (mysqli_query($conn, $sql)) {
             $success = 'Image has been addedd successfully';
         } else {
-          // error
           echo 'Error: ' . mysqli_error($conn);
         }
     }
@@ -32,17 +27,13 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php
-// Handle image deletion
 if (isset($_POST['deleteImage'])) {
     $imageIdToDelete = $_POST['imageId'];
     $success = '';
-    // Perform the deletion from the database
     $deleteSql = "DELETE FROM gallery WHERE id = '$imageIdToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
-        // header("Refresh:0");
         $success = 'Image has been deleted successfully';
     } else {
-        // Error in deletion
         echo "Error deleting image: " . mysqli_error($conn);
     }
 }
@@ -63,7 +54,7 @@ if (isset($_POST['deleteImage'])) {
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
                     <h1>Gallery</h1>
-                    <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                     <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
                         <span><i class="mdi mdi-chevron-right"></i></span>Gallery</p>
                 </div>
                 <div>

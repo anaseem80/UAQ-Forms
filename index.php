@@ -1,56 +1,28 @@
 <?php include 'includes/header.php' ?>
+    <?php 
+        $sql = 'SELECT * FROM sliders';
+        $result = mysqli_query($conn, $sql);
+        $sliders = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    ?>
+
 
     <header class="header-top">
         <div class="swiper header">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-color: #8DD8D4;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Design your</span> <span class="d-block">Packaging Services.</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/1.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
+                <?php foreach($sliders as $index => $item): ?>
+                    <div class="swiper-slide" style="background-color: <?php echo $item['color']?>;">
+                        <div class="container h-100">
+                            <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
+                                <div class="col-lg-6 h-auto" data-aos="fade-left"><h1><span class="d-block"><?php echo $item['title']?></span> <span class="d-block"><?php echo $item['title2']?></span></h1></div>
+                                <div class="col-lg-6 h-auto" data-aos="fade-right">
+                                    <div class="image-slider">
+                                        <img src="../assets/uploads/<?php echo $item['image']?>" class="d-block h-100 w-100 img-fluid object-contain" alt="slider image">
+                                    </div>
+                                </div>    
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide" style="background-color: #E8EA9B;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Enhance your brand</span><span class="d-block">with creative designs.</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/2.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-color: #E9E1C6;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Custom design</span><span class="d-block">Services For Your Clients.</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/3.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-color: #F4E49F;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Ensuring</span><span class="d-block">Packaging Safety.</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/4.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-color: #F4E49F;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Competitive</span><span class="d-block">Pricing Packages.</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/5.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide" style="background-color: #F4E49F;">
-                    <div class="container h-100">
-                        <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                            <div class="col-lg-6" data-aos="fade-left"><h1><span class="d-block">Active in</span><span class="d-block">Sustainability Initiatives...</span></h1></div>
-                            <div class="col-lg-6" data-aos="fade-right"><img src="images/slider/6.png" class="d-block w-100 img-fluid" alt="slider image"></div>    
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </header>
@@ -62,11 +34,11 @@
                 <p>
                     <?php echo $settings['about'] ?>
                 </p>
-                <a href="#" class="btn bg-primary-main text-light rounded-pill d-inline-block main-button">read more <i class="fa fa-arrow-right"></i></a>
+                <a href="#computer-forms" class="btn bg-primary-main text-light rounded-pill d-inline-block main-button">read more <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
-    <section class="computer-forms bg-light p-main">
+    <section class="computer-forms bg-light p-main" id="computer-forms">
         <div class="container">
             <h3 class="text-center fs-main text-primary-main">Computer forms. What Makes Them Unique</h3>
             <div class="row groups">
@@ -225,15 +197,15 @@
                 <div class="swiper clients">
                     <div class="swiper-wrapper mt-5">
                         <?php 
-                            $sql = 'SELECT * FROM gallery';
+                            $sql = 'SELECT * FROM clients LIMIT 15';
                             $result = mysqli_query($conn, $sql);
-                            $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            $clients = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         ?>
-                        <?php if(empty($gallery)): ?>
-                        <?php elseif(!empty($gallery)): ?>
-                        <?php foreach($gallery as $index => $item): ?>
+                        <?php if(empty($clients)): ?>
+                        <?php elseif(!empty($clients)): ?>
+                        <?php foreach($clients as $index => $item): ?>
                             <div class="swiper-slide solution text-center" data-aos="fade-down">
-                                <img src="../assets/uploads/<?php echo $item['image']?>" alt="solution">
+                                <img src="../assets/uploads/clients/<?php echo $item['image']?>" class="object-contain" width="170" height="53" alt="solution">
                             </div>
                         <?php endforeach; ?>
                         <?php endif; ?>

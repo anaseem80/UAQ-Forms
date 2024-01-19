@@ -25,7 +25,7 @@ $totalPages = ceil($totalRecords / $itemsPerPage);
 ?>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background: var(--Gradient-Colors-G_09, linear-gradient(90deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%));">
         <h1 class="text-light" data-aos="fade-up">INSPIRATION <span>GALLERY</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto position-absolute" data-aos="fade-right">
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
             <h1>Gallery</h1>
             <h5>Home / Gallery</h5>
         </div>
