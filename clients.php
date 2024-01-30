@@ -1,4 +1,7 @@
-<?php include 'includes/header.php' ?>
+<?php 
+$title = "Clients";
+include 'includes/header.php';
+?>
 
 
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">

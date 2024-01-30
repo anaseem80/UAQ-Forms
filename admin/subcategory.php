@@ -231,11 +231,13 @@ if (isset($_POST["updateSubCategory"])) {
                                                         ?>
                                                     </td>
                                                     <td>
-                                                        <form method="post" action="">
-                                                            <input type="hidden" name="CategoryId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteCategory" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
-                                                        </form>
-                                                        <button type="button" class="btn-edit" data-bs-toggle="modal" data-bs-target="#EditModal<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
+                                                        <div class="text-center d-flex justify-content-center">
+                                                            <form method="post" action="">
+                                                                <input type="hidden" name="CategoryId" value="<?php echo $item['id']; ?>">
+                                                                <button type="submit" name="deleteCategory" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                            </form>
+                                                            <button type="button" class="btn-edit ml-3" data-bs-toggle="modal" data-bs-target="#EditModal<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
+                                                        </div>
                                                         <!-- Edit Modal for each row -->
                                                         <div class="modal fade" id="EditModal<?php echo $item['id']; ?>" tabindex="-1" aria-labelledby="EditSubCategoryLabel" aria-hidden="true">
                                                             <div class="modal-dialog">

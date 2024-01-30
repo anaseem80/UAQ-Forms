@@ -1,9 +1,13 @@
 <?php include '../config/db.php'?>
 <?php 
+session_start();
 $sql = 'SELECT * FROM settings WHERE id = 1';
 $result = mysqli_query($conn, $sql);
 $settings = mysqli_fetch_assoc($result);
 
+if(!isset($_SESSION['email'])){
+	header('Location: login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

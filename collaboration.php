@@ -1,4 +1,8 @@
-<?php include 'includes/header.php' ?>
+<?php 
+$title = "Collaboration";
+include 'includes/header.php';
+?>
+
 
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
         <h1 class="text-light" data-aos="fade-up">Our <span>Solutions</span></h1>

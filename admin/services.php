@@ -11,18 +11,16 @@ if (isset($_POST['submit'])) {
     } else {
         $image = $_FILES['image']['name'];
         $title = $_POST['title'];
-        $title2 = $_POST['title2'];
-        $color = $_POST['color'];
 
-        $targetDir = "../assets/uploads/sliders/";
+        $targetDir = "../assets/uploads/services/";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
     }
 
     if (empty($imageError)) {
-        $sql = "INSERT INTO sliders (image, title, title2, color) VALUES ('$image', '$title', '$title2', '$color')";
+        $sql = "INSERT INTO services (image, title) VALUES ('$image', '$title')";
         if (mysqli_query($conn, $sql)) {
-            $success = 'Slider has been addedd successfully';
+            $success = 'Service has been addedd successfully';
         } else {
           echo 'Error: ' . mysqli_error($conn);
         }
@@ -30,68 +28,66 @@ if (isset($_POST['submit'])) {
 }
 
 
-if (isset($_POST["updateSlider"])) {
-    $editSliderId = $_POST["editSliderId"];
+if (isset($_POST["updateservice"])) {
+    $editserviceId = $_POST["editserviceId"];
     $title = $_POST['title'];
-    $title2 = $_POST['title2'];
-    $color = $_POST['color'];
 
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         
-        $uploadDir = "../assets/uploads/sliders/";
+        $uploadDir = "../assets/uploads/services/";
         $uploadFile = $uploadDir . basename($image);
         
         if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            $updateSliderQuery = "UPDATE sliders SET title=?, title2=?, color=?, image=? WHERE id=?";
-            $stmtSlider = mysqli_prepare($conn, $updateSliderQuery);
+            $updateserviceQuery = "UPDATE services SET title=?, image=? WHERE id=?";
+            $stmtservice = mysqli_prepare($conn, $updateserviceQuery);
             
-            mysqli_stmt_bind_param($stmtSlider, 'ssssi', $title, $title2, $color, $image, $editSliderId);
+            mysqli_stmt_bind_param($stmtservice, 'ssi', $title, $image, $editserviceId);
             
-            if (mysqli_stmt_execute($stmtSlider)) {
-                $success = 'Slider has been updated successfully';
+            if (mysqli_stmt_execute($stmtservice)) {
+                $success = 'service has been updated successfully';
             } else {
-                $error_message = 'Error updating Slider: ' . mysqli_stmt_error($stmtSlider);
+                $error_message = 'Error updating service: ' . mysqli_stmt_error($stmtservice);
             }
             
-            mysqli_stmt_close($stmtSlider);
+            mysqli_stmt_close($stmtservice);
         } else {
             $error_message = "Failed to upload the new image.";
         }
     } else {
-        $updateSliderQuery = "UPDATE sliders SET title=?, title2=?, color=? WHERE id=?";
-        $stmtSlider = mysqli_prepare($conn, $updateSliderQuery);
-        mysqli_stmt_bind_param($stmtSlider, 'sssi', $title, $title2, $color, $editSliderId);
+        $updateserviceQuery = "UPDATE services SET title=? WHERE id=?";
+        $stmtservice = mysqli_prepare($conn, $updateserviceQuery);
+        mysqli_stmt_bind_param($stmtservice, 'si', $title, $editserviceId);
 
-        if (mysqli_stmt_execute($stmtSlider)) {
-            $success = 'Slider has been updated successfully';
+        if (mysqli_stmt_execute($stmtservice)) {
+            $success = 'service has been updated successfully';
         } else {
-            $error_message = 'Error updating Slider: ' . mysqli_stmt_error($stmtSlider);
+            $error_message = 'Error updating service: ' . mysqli_stmt_error($stmtservice);
         }
 
-        mysqli_stmt_close($stmtSlider);
+        mysqli_stmt_close($stmtservice);
     }
 }
 
 ?>
 
 <?php
-if (isset($_POST['deletSlider'])) {
-    $sliderToDelete = $_POST['sliderId'];
+if (isset($_POST['deletService'])) {
+    $serviceToDelete = $_POST['serviceId'];
     $success = '';
-    $deleteSql = "DELETE FROM sliders WHERE id = '$sliderToDelete'";
+    $deleteSql = "DELETE FROM services WHERE id = '$serviceToDelete'";
     if (mysqli_query($conn, $deleteSql)) {
-        $success = 'Slider has been deleted successfully';
+        $success = 'service has been deleted successfully';
     } else {
-        echo "Error deleting slider: " . mysqli_error($conn);
+        echo "Error deleting service: " . mysqli_error($conn);
     }
 }
 ?>
 
 <?php 
-    $sql = 'SELECT * FROM sliders';
+    $sql = 'SELECT * FROM services';
     $result = mysqli_query($conn, $sql);
-    $sliders = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $services = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -102,12 +98,12 @@ if (isset($_POST['deletSlider'])) {
         <div class="content">
             <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
                 <div>
-                    <h1>Sliders</h1>
+                    <h1>Services</h1>
                      <p class="breadcrumbs"><span><a href="index.php">Home</a></span>
-                        <span><i class="mdi mdi-chevron-right"></i></span>Sliders</p>
+                        <span><i class="mdi mdi-chevron-right"></i></span>Services</p>
                 </div>
                 <div>
-                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add Slider</a>
+                    <a href="javascripit:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddImage"> Add service</a>
                 </div>
             </div>
             <div class="row">
@@ -126,34 +122,28 @@ if (isset($_POST['deletSlider'])) {
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
-                                            <th>Sub Title</th>
-                                            <th>Color</th>
                                             <th>Image</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php if(empty($sliders)): ?>#8DD8D4
-                                            <?php elseif(!empty($sliders)): ?>
-                                                <?php foreach($sliders as $index => $item): ?>
+                                        <?php if(empty($services)): ?>
+                                            <?php elseif(!empty($services)): ?>
+                                                <?php foreach($services as $index => $item): ?>
                                                 <tr>
                                                     <td><?php echo $index +1 ?></td>
                                                     <td><?php echo $item['title']?></td>
-                                                    <td><?php echo $item['title2']?></td>
-                                                    <td>
-                                                        <span style="background-color:<?php echo $item['color']?>; height:30px; width:30px" class="rounded-circle d-block"></span>
-                                                    </td>
-                                                    <td><img class="tbl-thumb" src="../assets/uploads/sliders/<?php echo $item['image']?>" alt="Product Image" /></td>
+                                                    <td><img class="tbl-thumb" src="../assets/uploads/services/<?php echo $item['image']?>" alt="Product Image" /></td>
                                                     <td>
                                                         <div class="text-center d-flex justify-content-center">
-                                                            <form method="post" action="" onsubmit="deletSlider()">
-                                                                <input type="hidden" name="sliderId" value="<?php echo $item['id']; ?>">
-                                                                <button type="submit" name="deletSlider" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                            <form method="post" action="" onsubmit="deletService()">
+                                                                <input type="hidden" name="serviceId" value="<?php echo $item['id']; ?>">
+                                                                <button type="submit" name="deletService" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
                                                             </form>
-                                                            <button type="button" class="btn-edit ml-3" data-bs-toggle="modal" data-bs-target="#EditSlider-<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
+                                                            <button type="button" class="btn-edit ml-3" data-bs-toggle="modal" data-bs-target="#Editservice-<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
                                                         </div>
-                                                        <div class="modal fade" id="EditSlider-<?php echo $item['id']?>" tabindex="-1" aria-labelledby="EditSliderLabel-<?php echo $item['id']?>" aria-hidden="true">
+                                                        <div class="modal fade" id="Editservice-<?php echo $item['id']?>" tabindex="-1" aria-labelledby="EditserviceLabel-<?php echo $item['id']?>" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <form class="modal-content" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
                                                                 <div class="modal-header">
@@ -165,14 +155,6 @@ if (isset($_POST['deletSlider'])) {
                                                                         <div class="form-group">
                                                                             <label for="title">Title</label>
                                                                             <input type="text" name="title" class="form-control" value="<?php echo $item['title']?>" placeholder="Enter title here" id="title" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="title2">Title 2</label>
-                                                                            <input type="text" name="title2" class="form-control" value="<?php echo $item['title2']?>" placeholder="Enter title here" id="title2" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="color">Color</label>
-                                                                            <input type="color" name="color" class="form-control" value="<?php echo $item['color']?>" placeholder="Enter title here" id="color" required>
                                                                         </div>
                                                                         <div class="col-12">
                                                                             <div class="ec-vendor-img-upload">
@@ -188,7 +170,7 @@ if (isset($_POST['deletSlider'])) {
                                                                                         <div class="avatar-preview ec-preview">
                                                                                             <div class="imagePreview ec-div-preview">
                                                                                                 <img class="ec-image-preview"
-                                                                                                    src="../assets/uploads/sliders/<?php echo $item['image']?>"
+                                                                                                    src="../assets/uploads/services/<?php echo $item['image']?>"
                                                                                                     alt="edit" />
                                                                                             </div>
                                                                                         </div>
@@ -200,8 +182,8 @@ if (isset($_POST['deletSlider'])) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <input type="hidden" name="editSliderId" id="editSliderId" value="<?php echo $item['id'];?>">
-                                                                    <button type="submit" name="updateSlider" class="btn btn-primary">Save changes</button>
+                                                                    <input type="hidden" name="editserviceId" id="editserviceId" value="<?php echo $item['id'];?>">
+                                                                    <button type="submit" name="updateservice" class="btn btn-primary">Save changes</button>
                                                                 </div>
                                                                 </form>
                                                             </div>
@@ -232,14 +214,6 @@ if (isset($_POST['deletSlider'])) {
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" name="title" class="form-control" placeholder="Enter title here" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label for="title2">Title 2</label>
-                    <input type="text" name="title2" class="form-control" placeholder="Enter title here" id="title2" required>
-                </div>
-                <div class="form-group">
-                    <label for="color">Color</label>
-                    <input type="color" name="color" class="form-control" placeholder="Enter title here" id="color" required>
                 </div>
                 <div class="col-12">
                     <div class="ec-vendor-img-upload">

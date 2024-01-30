@@ -1,6 +1,28 @@
 <?php include 'includes/header.php' ?>
 
 <?php
+
+$quoteId = isset($_GET['quoteId']) ? $_GET['quoteId'] : '';
+
+if ($quoteId !== '' && is_numeric($quoteId)) {
+    $checkSql = "SELECT * FROM quote WHERE id = $quoteId";
+    
+    $result = $conn->query($checkSql);
+
+    if ($result->num_rows > 0) {
+        $updateCategoryQuery = "UPDATE quote SET notification = 1 WHERE id = $quoteId";
+        
+        if ($conn->query($updateCategoryQuery) === TRUE) {
+        } else {
+        }
+    } else {
+    }
+} else {
+}
+
+?>
+<?php
+
 if (isset($_POST['deleteQuote'])) {
     $quoteIdToDelete = $_POST['quoteId'];
     $success = '';
@@ -12,7 +34,11 @@ if (isset($_POST['deleteQuote'])) {
     }
 }
 ?>
-
+<?php 
+    $sql = 'SELECT * FROM categories';
+    $result = mysqli_query($conn, $sql);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
 <?php 
     $sql = 'SELECT * FROM quote';
     $result = mysqli_query($conn, $sql);
@@ -61,12 +87,16 @@ if (isset($_POST['deleteQuote'])) {
                                         <?php if(empty($quote)): ?>
                                             <?php elseif(!empty($quote)): ?>
                                                 <?php foreach($quote as $index => $item): ?>
-                                                <tr>
+                                                <tr id="quote<?php echo $item['id'] ?>">
                                                     <td><?php echo $index +1 ?></td>
                                                     <td><?php echo $item['name'] ?></td>
                                                     <td><?php echo $item['email'] ?></td>
                                                     <td><?php echo $item['phone'] ?></td>
-                                                    <td><?php echo $item['category'] ?></td>
+                                                    <td>
+                                                        <?php foreach($categories as $index => $itemm): ?>
+                                                            <?php echo $item['category'] == $itemm["id"] ? $itemm['name'] : ''?>
+                                                        <?php endforeach; ?>
+                                                    </td>
                                                     <td><?php echo $item['company'] ?></td>
                                                     <td><?php echo $item['message'] ?></td>
                                                     <td class="text-center">

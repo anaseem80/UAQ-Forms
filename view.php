@@ -1,4 +1,9 @@
-<?php include 'includes/header.php' ?>
+<?php 
+$title = "Expertise";
+
+include 'includes/header.php';
+?>
+
 <?php 
 if (isset($_GET['id'])) {
     $categoryId = $_GET['id'];
@@ -23,32 +28,28 @@ if (isset($_GET['id'])) {
     header("Location: expertise.php");
 }
   
+
+
 ?>
 
 <?php
-// Number of images per page
 $imagesPerPage = 6;
 
 if (isset($_GET['id'])) {
     $categoryId = $_GET['id'];
 
-    // Get the current page
     $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-    // Calculate the offset to retrieve the correct range of images
     $offset = ($current_page - 1) * $imagesPerPage;
 
-    // Query to get a specific range of images
     $getImagesQuery = "SELECT * FROM images WHERE subcategory_id = $categoryId LIMIT $offset, $imagesPerPage";
     $result = mysqli_query($conn, $getImagesQuery);
     $images = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    // Get the total number of images for pagination
     $totalImagesQuery = "SELECT COUNT(*) as total FROM images WHERE subcategory_id = $categoryId";
     $totalImagesResult = mysqli_query($conn, $totalImagesQuery);
     $totalImages = mysqli_fetch_assoc($totalImagesResult)['total'];
 
-    // Calculate the total number of pages
     $totalPages = ceil($totalImages / $imagesPerPage);
 }
 ?>

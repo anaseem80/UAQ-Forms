@@ -1,36 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector(".navbar");
-    let prevScrollPos = window.pageYOffset;
-    function toggleNavbar() {
-        const currentScrollPos = window.pageYOffset;
-        if (prevScrollPos > currentScrollPos) {
-              navbar.classList.add('visible-nav');
-              navbar.classList.remove('hidden-nav');
-        } else {
-            navbar.classList.add('hidden-nav');
-            navbar.classList.remove('visible-nav');
-        }
+// document.addEventListener('DOMContentLoaded', function() {
+//     const navbar = document.querySelector(".navbar");
+//     let prevScrollPos = window.pageYOffset;
+//     function toggleNavbar() {
+//         const currentScrollPos = window.pageYOffset;
+//         if (prevScrollPos > currentScrollPos) {
+//               navbar.classList.add('visible-nav');
+//               navbar.classList.remove('hidden-nav');
+//         } else {
+//             navbar.classList.add('hidden-nav');
+//             navbar.classList.remove('visible-nav');
+//         }
         
-        prevScrollPos = currentScrollPos;
-    }
+//         prevScrollPos = currentScrollPos;
+//     }
   
-    // Initial call to toggleNavbar
-    // toggleNavbar();
+//     // Initial call to toggleNavbar
+//     // toggleNavbar();
   
-    // Listen for scroll events
-    window.addEventListener('scroll', toggleNavbar);
-  });
+//     // Listen for scroll events
+//     window.addEventListener('scroll', toggleNavbar);
+//   });
 
 
-  $(window).on("scroll", function () {
-    var scroll = $(window).scrollTop();
-    if (scroll < 2) {
-    $(".navbar").removeClass("shadow-sm");
+//   $(window).on("scroll", function () {
+//     var scroll = $(window).scrollTop();
+//     if (scroll < 2) {
+//     $(".navbar").removeClass("shadow-sm");
 
-    } else {
-    $(".navbar").addClass("shadow-sm");
-    }
-});
+//     } else {
+//     $(".navbar").addClass("shadow-sm");
+//     }
+// });
 
 
 (function($) { "use strict";
@@ -101,3 +101,24 @@ window.SmoothScrollOptions = {
 	fixedBackground: true,
 	excluded          : ''  
 }
+
+$("#quote").submit(function(e){
+	e.preventDefault()
+	var data = $('#quote').serializeArray().reduce(function(obj, item) {
+		obj[item.name] = item.value;
+		return obj;
+	}, {});
+	$(".loader-quote").css("display","grid")
+	$("#submit-quote").attr("disabled","true")
+	$.post('../php/quote.php',data , function(data) {
+		$(".loader-quote").fadeOut()
+		$("#submit-quote").removeAttr("disabled")
+		if(data == 1){
+			toastr.success('Thanks for reaching out with us, We will be in touch with you soon! 😍');
+		}else{
+			toastr.error('Something went wrong, please try again later');
+		}
+		
+		
+	})
+})

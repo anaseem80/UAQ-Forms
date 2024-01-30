@@ -1,33 +1,25 @@
-<?php include 'includes/header.php' ?>
 <?php 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    // Collect form data
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $category = $_POST['category'];
-    $message = $_POST['message'];
-
-    // Insert data into the 'quote' table
-    $insertSql = "INSERT INTO quote (name, company, email, phone, category, message) VALUES ('$name', '$company', '$email', '$phone', '$category', '$message')";
-
-    if (mysqli_query($conn, $insertSql)) {
-        // Insertion successful
-        // header("Location: quote.php#quote");
-        $successMessage = 'Thanks for reaching out with us, We will be in touch with you soon!';
-    } else {
-        // Error in insertion
-        $errorMessage = "Error submitting form: " . mysqli_error($conn);
-    }
-}
+$title = "Get Quote";
+include 'includes/header.php';
 ?>
+
 <?php 
     $sql = 'SELECT * FROM categories';
     $result = mysqli_query($conn, $sql);
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
+<style>
+    .loader-quote{
+        top: 0;
+        place-content: center;
+        left: 0;
+        background: #00000052;
+    }
+    .loader-quote .spinner-border{
+        width: 15px;
+        height: 15px;
+    }
+</style>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
         <h1 class="text-light" data-aos="fade-up">Online <span>Quote</span></h1>
         <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
@@ -57,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </div>
         </div>
 
-        <form action="" method="POST" id="quote" class="form p-main">
+        <form id="quote" class="form p-main">
             <div class="container">
                 <div class="row quote">
                     <div class="col-lg-12 mb-3">
@@ -100,7 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         <textarea type="tel" class="border-bottom border-0 pb-2 w-100 outline-none" rows="7" name="message" placeholder="Message" required></textarea>
                     </div>
                     <div class="col-lg-12 mt-0 form-group">
-                        <button href="#" name="submit" type="submit" class="btn bg-primary-main text-light w-100 d-inline-block main-button">Send Now <i class="fa fa-arrow-right"></i></button>
+                        <button id="submit-quote" name="submit" type="submit" class="btn bg-primary-main text-light w-100 d-inline-block main-button position-relative">
+                            Send Now <i class="fa fa-arrow-right"></i>
+                            <div class="position-absolute loader-quote w-100 h-100" style="display: none;">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -90,11 +90,11 @@ body{
     margin-top: 110px;
 }
 header .swiper-slide{
-    height: 700px;}
+    height: 600px;}
 header .swiper-slide h1{
+    text-transform: uppercase;
     font-size: 64px;}
-.about-us .right-side{
-    padding: 100px;}
+
 
 .about-us img{
     object-fit: cover;
@@ -124,29 +124,53 @@ header .swiper-slide h1{
     left: -60px;
     top: 71px;
 }
-@media(max-width:767px){
+@media(max-width:1200px){
     .about-us .right-side{
         padding:40px 25px;
     }
-    .header-top{
-        margin-top: 89px;
-    }
-    .navbar{
-        padding: 15px;}
+}
+.image-slider{
+    height: 500px;
+    width: 100%;
+  }
+  footer{
+    padding-bottom: 0 !important;
+}
+@media(max-width:992px){
     .swiper-slide h1{
         font-size: 35px !important;
     }
-    .clients-section .swiper-next-clients{
-        right: 0;
-        top: 71px;
+    footer{
+        padding-bottom: 100px !important;
+    }
+    .image-slider {
+        height: 370px;
+        width: 100%;
+    }
+    .header-top{
+        margin-top: 89px;
     }
     .clients-section .swiper-prev-clients{
         left: 0;
         top: 71px;
     }
+    .clients-section .swiper-next-clients{
+        right: 0;
+        top: 71px;
+    }
+}
+
+@media(max-width:767px){
+
+    .navbar{
+        padding: 15px;}
+
+
+
 }
 .computer-forms h3{
     margin-bottom: 82px;
+    text-transform: uppercase;
 }
 .computer-forms .groups{
     gap: 82px 0;
@@ -167,13 +191,14 @@ header .swiper-slide h1{
     color: #343434;
     font-size: 24px;
     font-weight: 700;
+    text-transform: uppercase;
 }
 .services .service .card-text{
     color: #808080;
     font-size: 14px;
 }
 .services .service{
-    padding: 28px;
+    padding: 20px;
 }
 .services .service a{
     font-size: 18px;
@@ -190,7 +215,7 @@ header .swiper-slide h1{
     transition: 0.1s ease-in-out;
 }
 .services .service .card-img-top:hover img{
-    transform: rotate(15deg) scale(1.2);
+    transform: scale(1.2);
 }
 .services .service a:hover{
     color: #f7941d;
@@ -222,6 +247,7 @@ header .swiper-slide h1{
 footer .links p{
     color: #2E2F35;
     font-weight: 500;
+    text-transform: uppercase;
 }
 footer .printed{
     font-size: 16px;
@@ -404,6 +430,7 @@ footer .links a{
     border:2px solid #1280C4;}
 .fs-main{
     font-size: var(--font-size);
+    text-transform: uppercase;
 }
 .fs-16{
     font-size: 16px !important;
@@ -560,6 +587,7 @@ form textarea:hover{
 .contact-info h1{
     color: #274C5B;
     font-weight: 700;
+    text-transform: uppercase;
 }
 .contact-info p{
     font-size: 14px !important;
@@ -648,6 +676,7 @@ form textarea:hover{
 /**/
 .solutions-page h2{
     font-weight: 700;
+    text-transform: uppercase;
 }
 .solutions-page .container > div{
     margin-bottom: 97px;
@@ -809,20 +838,10 @@ form textarea:hover{
       }
   }
 
-  .image-slider{
-    height: 500px;
-    width: 100%;
-  }
+
   @media(max-width:767px) {
     .clients{
         grid-template-columns: repeat(1, 1fr);
-    }
-    .image-slider{
-        height: 370px;
-        width: 100%;
-    }
-    header .swiper-slide{
-        height: 600px;
     }
   }
 
@@ -832,4 +851,24 @@ form textarea:hover{
   }
   .header-top .swiper-slide-active{
     opacity: 1 !important;
+  }
+
+  .whatsapp-icon{
+    left: 15px;
+    bottom: 15px;
+  }
+  .whatsapp-icon img{
+    transition: 0.3s;
+  }
+  .whatsapp-icon img:hover{
+    transform: rotate(15deg);
+  }
+
+
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+      pointer-events: none;
   }

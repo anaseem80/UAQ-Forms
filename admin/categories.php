@@ -16,9 +16,7 @@ if (isset($_POST['submit'])) {
         $targetDir = "../assets/uploads/";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
-    }
 
-    if (empty($imageError)) {
         $sql = "INSERT INTO categories (image, name, title) VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, 'sss', $image, $name, $title);
@@ -26,10 +24,55 @@ if (isset($_POST['submit'])) {
         if (mysqli_stmt_execute($stmt)) {
             $success = 'Category has been added successfully';
         } else {
-            echo 'Error: ' . mysqli_stmt_error($stmt);
+            $error_message = 'Error: ' . mysqli_stmt_error($stmt);
         }
 
         mysqli_stmt_close($stmt);
+    }
+}
+
+if (isset($_POST["updateCategory"])) {
+    $editCategoryId = $_POST["editCategoryId"];
+    $title = $_POST["title"];
+    $name = $_POST["name"];
+    
+    // Check if a new image is uploaded
+    if (!empty($_FILES['image']['name'])) {
+        $image = $_FILES['image']['name'];
+        
+        $uploadDir = "../assets/uploads/";
+        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+        
+        // Move the new image to the upload directory
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+            // Update category information, including the new image
+            $updateCategoryQuery = "UPDATE categories SET title=?, name=?, image=? WHERE id=?";
+            $stmtCategory = mysqli_prepare($conn, $updateCategoryQuery);
+            mysqli_stmt_bind_param($stmtCategory, 'sssi', $title, $name, $image, $editCategoryId);
+            
+            if (mysqli_stmt_execute($stmtCategory)) {
+                $success = 'Category has been updated successfully';
+            } else {
+                $error_message = 'Error updating category: ' . mysqli_stmt_error($stmtCategory);
+            }
+            
+            mysqli_stmt_close($stmtCategory);
+        } else {
+            $error_message = "Failed to upload the new image.";
+        }
+    } else {
+        // Update category information without changing the image
+        $updateCategoryQuery = "UPDATE categories SET title=?, name=? WHERE id=?";
+        $stmtCategory = mysqli_prepare($conn, $updateCategoryQuery);
+        mysqli_stmt_bind_param($stmtCategory, 'ssi', $title, $name, $editCategoryId);
+
+        if (mysqli_stmt_execute($stmtCategory)) {
+            $success = 'Category has been updated successfully';
+        } else {
+            $error_message = 'Error updating category: ' . mysqli_stmt_error($stmtCategory);
+        }
+
+        mysqli_stmt_close($stmtCategory);
     }
 }
 ?>
@@ -99,11 +142,63 @@ if (isset($_POST['deleteCategory'])) {
                                                     <td><?php echo $item['name']?></td>
                                                     <td><?php echo $item['title']?></td>
                                                     <td><img class="tbl-thumb" src="../assets/uploads/<?php echo $item['image']?>" alt="Product Image" /></td>
-                                                    <td class="text-center">
-                                                        <form method="post" action="">
-                                                            <input type="hidden" name="CategoryId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteCategory" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
-                                                        </form>
+                                                    <td>
+                                                        <div class="text-center d-flex justify-content-center">
+                                                            <form method="post" action="">
+                                                                <input type="hidden" name="CategoryId" value="<?php echo $item['id']; ?>">
+                                                                <button type="submit" name="deleteCategory" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                            </form>
+                                                            <button type="button" class="btn-edit ml-3" data-bs-toggle="modal" data-bs-target="#EditModal<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
+                                                        </div>
+                                                        <div class="modal fade" id="EditModal<?php echo $item['id']; ?>" tabindex="-1" aria-labelledby="EditCategoryLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <form class="modal-content" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="EditCategoryLabel">Edit Category</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row ec-vendor-uploads">
+                                                                            <div class="col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="name">Title</label>
+                                                                                    <input type="text" name="name" value="<?php echo $item['name']; ?>" class="form-control" placeholder="Enter title here" id="title">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="title">Description</label>
+                                                                                    <textarea name="title" class="form-control" placeholder="Enter description here"><?php echo $item['title']?></textarea>
+                                                                                </div>
+                                                                                <div class="ec-vendor-img-upload">
+                                                                                    <div class="ec-vendor-main-img">
+                                                                                        <div class="avatar-upload">
+                                                                                            <label for="imageUpload">Image</label>
+                                                                                            <div class="avatar-edit">
+                                                                                                <input type='file' id='imageUpload' name='image' class='ec-image-upload' accept='.png, .jpg, .jpeg'/>
+                                                                                                <label for="imageUpload">
+                                                                                                    <img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" />
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <div class="avatar-preview ec-preview">
+                                                                                                <div class="imagePreview ec-div-preview flex-column">
+                                                                                                    <div class="existing-image">
+                                                                                                        <img class="ec-image-preview" src="../assets/uploads/<?php echo $item['image']?>" alt="existing" />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <input type="hidden" name="editCategoryId" id="editCategoryId" value="<?php echo $item['id'];?>">
+                                                                        <button type="submit" name="updateCategory" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                         <?php endforeach; ?>

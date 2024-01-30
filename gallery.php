@@ -1,26 +1,23 @@
-<?php include 'includes/header.php' ?>
 <?php 
-// Number of items per page
-$itemsPerPage = 4;
+$title = "Gallery";
+include 'includes/header.php';
+?>
+<?php 
+$itemsPerPage = 36;
 
-// Get the current page number from the URL, default to 1
 $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 
-// Calculate the offset for the query based on the current page
 $offset = ($current_page - 1) * $itemsPerPage;
 
-// Fetch a specific range of records based on the current page
-$sql = "SELECT * FROM gallery LIMIT $offset, $itemsPerPage";
+$sql = "SELECT * FROM gallery ORDER BY `order` ASC LIMIT $offset, $itemsPerPage";
 $result = mysqli_query($conn, $sql);
 $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Query to get the total count of all records
 $countSql = "SELECT COUNT(*) as total FROM gallery";
 $countResult = mysqli_query($conn, $countSql);
 $countData = mysqli_fetch_assoc($countResult);
 $totalRecords = $countData['total'];
 
-// Calculate the total number of pages
 $totalPages = ceil($totalRecords / $itemsPerPage);
 ?>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background: var(--Gradient-Colors-G_09, linear-gradient(90deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%));">
@@ -36,8 +33,8 @@ $totalPages = ceil($totalRecords / $itemsPerPage);
             <?php if (!empty($gallery)): ?>
                 <?php foreach($gallery as $index => $item): ?>
                     <div class="col-lg-3 mb-4" data-aos="fade-down">
-                        <a data-fslightbox="gallery" href="assets/uploads/<?php echo $item['image']?>">
-                            <img src="assets/uploads/<?php echo $item['image']?>" class="w-100 object-cover" width="280" height="280" alt="gallery image">
+                        <a data-fslightbox="gallery" href="assets/uploads/gallery/<?php echo $item['image']?>">
+                            <img src="assets/uploads/gallery/<?php echo $item['image']?>" class="w-100 object-cover" width="280" height="280" alt="gallery image">
                         </a>
                     </div>
                 <?php endforeach; ?>

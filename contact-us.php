@@ -1,4 +1,8 @@
-<?php include 'includes/header.php' ?>
+<?php 
+$title = "Contact";
+include 'includes/header.php';
+?>
+
 
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
         <h1 class="text-light" data-aos="fade-up">Contact <span>Information</span></h1>
@@ -39,7 +43,7 @@
                 <div class="container p-0">
                     <div class="col-xl-5 col-lg-8 col-md-12 ms-auto mb-0 bg-white locations-child" data-aos="fade-down">
                         <p class="title my-0">Location</p>
-                        <h1 class="my-2">Computer forms</h1>
+                        <h1 class="my-2 text-uppercase">Computer forms</h1>
                         <p class="subtitle my-0">We are always happy to hear from our customers and partners. Whether you have a question about our products and services, want to request a quote, or have any feedback or concerns, our team is ready to assist you.</p>
                         <div class="location d-flex flex-wrap mt-4">
                             <img src="images/loaction.png" width="50" height="50" alt="location">

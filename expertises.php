@@ -1,8 +1,26 @@
-<?php include 'includes/header.php' ?>
 <?php 
-    $sql = 'SELECT * FROM categories';
+$title = "Expertises";
+include 'includes/header.php';
+?>
+
+<?php 
+    $itemsPerPage = 6;
+
+    $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+
+    $offset = ($current_page - 1) * $itemsPerPage;
+
+    $sql = "SELECT * FROM categories LIMIT $offset, $itemsPerPage";
     $result = mysqli_query($conn, $sql);
     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $countSql = "SELECT COUNT(*) as total FROM categories";
+    $countResult = mysqli_query($conn, $countSql);
+    $countData = mysqli_fetch_assoc($countResult);
+    $totalRecords = $countData['total'];
+
+    $totalPages = ceil($totalRecords / $itemsPerPage);
+
 ?>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background-image: var(--Gradient-Colors-G_14, linear-gradient(90deg, #48C6EF 0%, #6F86D6 100%))">
         <h1 class="text-light" data-aos="fade-up">Print <span>Expertise</span></h1>
@@ -37,6 +55,21 @@
                 <?php endforeach; ?>
                 <?php endif; ?>
             </div>
+            <?php if (!empty($categories)): ?>
+            <div class="pagination d-flex justify-content-center mt-5 flex-wrap">
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?php echo $i; ?>" class="page-item border-primary-main rounded-circle text-center text-decoration-none <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                        <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
+
+                <?php if ($current_page < $totalPages): ?>
+                    <a href="?page=<?php echo $current_page + 1; ?>" class="page-item border-primary-main rounded-circle text-center text-decoration-none">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </main>
 

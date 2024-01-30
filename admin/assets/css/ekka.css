@@ -3356,7 +3356,7 @@ textarea.form-control-lg {
 .dropdown-toggle {
   white-space: nowrap;
 }
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
   display: inline-block;
   margin-left: 0.255em;
   vertical-align: 0.255em;
@@ -3368,7 +3368,7 @@ textarea.form-control-lg {
 }
 .dropdown-toggle:empty::after {
   margin-left: 0;
-}
+} */
 
 .dropdown-menu {
   position: absolute;
@@ -20341,18 +20341,18 @@ div.copied {
 .navbar .navbar-right .navbar-nav .notifications-menu .dropdown-toggle i {
   font-size: 28px;
 }
-.navbar .navbar-right .navbar-nav .notifications-menu .dropdown-toggle:after {
+.notify {
   border: 3px solid #ff8e8e;
   content: "";
   margin: 0;
-  position: relative;
+  position: absolute;
   width: 11px;
   height: 11px;
   border-radius: 100px;
-  top: -18px;
-  left: -17px;
+  top: 0;
+  right: 19px;
   -webkit-animation: blink 2s infinite;
-          animation: blink 2s infinite;
+  animation: blink 2s infinite;
 }
 @-webkit-keyframes blink {
   0% {
@@ -20436,16 +20436,19 @@ div.copied {
   font-size: 13px;
   display: block;
   color: #8a909d;
+  word-wrap: break-word;
 }
-.navbar .dropdown-menu > li a {
+.navbar .dropdown-menu > li button, .navbar .dropdown-menu > li a {
   display: block;
   color: #8a909d;
   font-size: 14px;
   padding: 10px 15px;
 }
+.navbar .dropdown-menu > li button:hover,
 .navbar .dropdown-menu > li a:hover {
   background-color: #f5f6fa;
 }
+.navbar .dropdown-menu > li button > i,
 .navbar .dropdown-menu > li a > i {
   width: 18px;
   margin-right: 10px;
@@ -20596,7 +20599,6 @@ div.copied {
 }
 .ec-header-light .navbar .navbar-right .navbar-nav .notifications-menu .dropdown-toggle {
   border-left: 1px solid #f3f3f3 !important;
-  border-right: 1px solid #f3f3f3 !important;
 }
 .ec-header-light .navbar .navbar-right .navbar-nav .user-menu .dropdown-toggle > span {
   color: #56606e;
@@ -20644,8 +20646,8 @@ div.copied {
 }
 @media (max-width: 575.98px) {
   .dropdown-notify {
-    width: 300px;
-    right: -67px;
+    width: 280px;
+    right: 0;
     left: auto;
   }
 }

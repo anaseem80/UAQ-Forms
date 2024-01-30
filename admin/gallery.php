@@ -4,13 +4,85 @@
 $imageError = '';
 $success = '';
 
+// $folderPath = "../assets/uploads/gallery/";
+
+// $files = glob($folderPath . "*.png");
+
+// foreach ($files as $order => $file) {
+//     $filename = basename($file);
+
+//     // Insert data into the 'gallery' table
+//     $sql = "INSERT INTO gallery (image, `order`) VALUES ('$filename', $order)";
+
+//     if ($conn->query($sql) === TRUE) {
+//         echo "Record for $filename inserted successfully.<br>";
+//     } else {
+//         echo "Error inserting record: " . $conn->error . "<br>";
+//     }
+// }
+
+
+
+if (isset($_POST["updateImage"])) {
+    $editImageId = $_POST["editImageId"];
+    $newOrder = $_POST["order"];
+
+    if (!is_numeric($newOrder)) {
+        $error_message = "Order must be a number.";
+    } else {
+        
+        $currentOrderQuery = "SELECT `order` FROM gallery WHERE id=?";
+        $stmtCurrentOrder = mysqli_prepare($conn, $currentOrderQuery);
+        mysqli_stmt_bind_param($stmtCurrentOrder, 'i', $editImageId);
+        mysqli_stmt_execute($stmtCurrentOrder);
+        $currentOrderResult = mysqli_stmt_get_result($stmtCurrentOrder);
+        $currentOrderRow = mysqli_fetch_assoc($currentOrderResult);
+        $currentOrder = $currentOrderRow['order'];
+        mysqli_stmt_close($stmtCurrentOrder);
+
+        $checkOrderQuery = "SELECT id FROM gallery WHERE `order`=? AND id != ?";
+        $stmtCheckOrder = mysqli_prepare($conn, $checkOrderQuery);
+        mysqli_stmt_bind_param($stmtCheckOrder, 'ii', $newOrder, $editImageId);
+        mysqli_stmt_execute($stmtCheckOrder);
+        $checkOrderResult = mysqli_stmt_get_result($stmtCheckOrder);
+        $orderExists = mysqli_fetch_assoc($checkOrderResult);
+        mysqli_stmt_close($stmtCheckOrder);
+
+        if ($orderExists) {
+            $updateOrderQuery = "UPDATE gallery SET `order`=? WHERE id=?";
+            $stmtUpdateOrder = mysqli_prepare($conn, $updateOrderQuery);
+            mysqli_stmt_bind_param($stmtUpdateOrder, 'ii', $newOrder, $editImageId);
+            mysqli_stmt_execute($stmtUpdateOrder);
+            mysqli_stmt_close($stmtUpdateOrder);
+
+            $updateOtherOrderQuery = "UPDATE gallery SET `order`=? WHERE id=?";
+            $stmtUpdateOtherOrder = mysqli_prepare($conn, $updateOtherOrderQuery);
+            mysqli_stmt_bind_param($stmtUpdateOtherOrder, 'ii', $currentOrder, $orderExists['id']);
+            mysqli_stmt_execute($stmtUpdateOtherOrder);
+            mysqli_stmt_close($stmtUpdateOtherOrder);
+
+            $success = 'Order values have been swapped successfully';
+        } else {
+             $updateOrderQuery = "UPDATE gallery SET `order`=? WHERE id=?";
+             $stmtUpdateOrder = mysqli_prepare($conn, $updateOrderQuery);
+             mysqli_stmt_bind_param($stmtUpdateOrder, 'ii', $newOrder, $editImageId);
+             mysqli_stmt_execute($stmtUpdateOrder);
+             mysqli_stmt_close($stmtUpdateOrder);
+ 
+             $success = 'Order has been updated successfully';
+        }
+    }
+}
+
+
 if (isset($_POST['submit'])) {
+
     if (empty($_FILES['image']['name'])) {
         $imageError = 'Image is required';
     } else {
         $image = $_FILES['image']['name'];
 
-        $targetDir = "../assets/uploads/gellary";
+        $targetDir = "../assets/uploads/gallery/";
         $targetFilePath = $targetDir . basename($image);
         move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath);
     }
@@ -40,9 +112,22 @@ if (isset($_POST['deleteImage'])) {
 ?>
 
 <?php 
-    $sql = 'SELECT * FROM gallery';
+    $sql = 'SELECT * FROM gallery ORDER BY `order` ASC';
     $result = mysqli_query($conn, $sql);
     $gallery = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // foreach ($gallery as $record) {
+    //     $id = $record['id'];
+    //     $order = $record['order'];
+
+    //     $updateSql = "UPDATE gallery SET `order` = $id WHERE id = $id";
+    //     if (mysqli_query($conn, $updateSql)) {
+    //         $success = 'Image has been deleted successfully';
+    //     } else {
+    //         echo "Error deleting image: " . mysqli_error($conn);
+    //     }
+    //     // echo "ID: $id, Order: $order<br>";
+    // }
 ?>
 
     <link href='assets/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
@@ -86,13 +171,60 @@ if (isset($_POST['deleteImage'])) {
                                             <?php elseif(!empty($gallery)): ?>
                                                 <?php foreach($gallery as $index => $item): ?>
                                                 <tr>
-                                                    <td><?php echo $index +1 ?></td>
-                                                    <td><img class="tbl-thumb" src="../assets/uploads/<?php echo $item['image']?>" alt="Product Image" /></td>
-                                                    <td class="text-center">
-                                                        <form method="post" action="" onsubmit="deleteImage()">
-                                                            <input type="hidden" name="imageId" value="<?php echo $item['id']; ?>">
-                                                            <button type="submit" name="deleteImage" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
-                                                        </form>
+                                                    <td><?php echo $item['order']; ?></td>
+                                                    <td><img class="tbl-thumb" src="../assets/uploads/gallery/<?php echo $item['image']?>" alt="Product Image" /></td>
+                                                    <td>
+                                                        <div class="text-center d-flex justify-content-center">
+                                                            <form method="post" action="" onsubmit="deleteImage()">
+                                                                <input type="hidden" name="imageId" value="<?php echo $item['id']; ?>">
+                                                                <button type="submit" name="deleteImage" class="btn-delete"><i class="fas fa-trash-alt text-danger"></i></button>
+                                                            </form>
+                                                            <button type="button" class="btn-edit ml-3" data-bs-toggle="modal" data-bs-target="#EditModal<?php echo $item['id']; ?>"><i class="fas fa-edit text-dark"></i></button>
+                                                        </div>
+                                                        <div class="modal fade" id="EditModal<?php echo $item['id']; ?>" tabindex="-1" aria-labelledby="EditCategoryLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <form class="modal-content" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="EditCategoryLabel">Edit Image</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row ec-vendor-uploads">
+                                                                            <div class="col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="name">Order</label>
+                                                                                    <input type="text" name="order" value="<?php echo $item['order']; ?>" class="form-control" placeholder="0" id="title">
+                                                                                </div>
+                                                                                <div class="ec-vendor-img-upload">
+                                                                                    <div class="ec-vendor-main-img">
+                                                                                        <div class="avatar-upload">
+                                                                                            <div class="avatar-edit">
+                                                                                                <input type='file' id='imageUpload' name='image' class='ec-image-upload' accept='.png, .jpg, .jpeg'/>
+                                                                                                <label for="imageUpload">
+                                                                                                    <img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" />
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <div class="avatar-preview ec-preview">
+                                                                                                <div class="imagePreview ec-div-preview flex-column">
+                                                                                                    <div class="existing-image">
+                                                                                                        <img class="ec-image-preview" src="../assets/uploads/gallery/<?php echo $item['image']?>" alt="existing" />
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <input type="hidden" name="editImageId" id="editImageId" value="<?php echo $item['id'];?>">
+                                                                        <button type="submit" name="updateImage" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                         <?php endforeach; ?>
