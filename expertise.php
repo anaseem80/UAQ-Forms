@@ -51,9 +51,14 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background-image: var(--Gradient-Colors-G_14, linear-gradient(90deg, #48C6EF 0%, #6F86D6 100%))">
-        <h1 class="text-light" data-aos="fade-up">Print <span>Expertise</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
+<style>
+    p{
+        text-align: center !important;
+    }
+</style>
+    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
+        <h1 class="text-light" data-aos-duration="100" data-aos="fade-up">Print <span>Expertise</span></h1>
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos-duration="100" data-aos="fade-right">
             <h1><?php echo $category[0]['name']?></h1>
             <h5>Home / Expertise / <?php echo $category[0]['name']?></h5>
         </div>
@@ -61,7 +66,7 @@ if (isset($_GET['id'])) {
 
     <main class="solutions-page main-content-page p-main mt-5">
         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-down">
+            <div class="text-center mb-5" data-aos-duration="100" data-aos="fade-down">
                 <h2 class="text-color-black"><?php echo $category[0]['title']?></h2>
             </div>
             <div class="expertises mt-5">
@@ -69,7 +74,7 @@ if (isset($_GET['id'])) {
                 
                 <?php elseif(!empty($sub_categories)): ?>
                 <?php foreach($sub_categories as $index => $item): ?>
-                    <div class="expertise">
+                <a href="view.php?id=<?php echo $item['id']?>" class="expertise text-decoration-none">
                     <?php
                         $subcategory_id = $item['id'];
                         $getImagesQuery = "SELECT image_path FROM images WHERE subcategory_id = $subcategory_id";
@@ -77,18 +82,17 @@ if (isset($_GET['id'])) {
 
                         if ($result && mysqli_num_rows($result) > 0) {
                             $row = mysqli_fetch_assoc($result);
-                            echo '<a href="view.php?id=' . $item['id'] . '"><img class="img-fluid w-100" src="' . $row['image_path'] . '" alt="Product Image"/></a>';
+                            echo '<img class="img-fluid w-100" src="' . $row['image_path'] . '" alt="Product Image"/>';
                         }
                     ?>
-                    <!-- <a href="view.php?id=<?php echo $item['id']?>"> <img src="<?php echo $item['image']?>" class="img-fluid w-100" alt="expertise"></a> -->
                     <div class="d-flex justify-content-between mt-4 align-items-center">
                         <div>
-                            <a href="view.php?id=<?php echo $item['id']?>" class="text-decoration-none"><h3><?php echo $item['title']?></h3></a>
-                            <a href="view.php?id=<?php echo $item['id']?>" class="text-decoration-none position-relative custom-link d-block">See More</a>
+                            <h3><?php echo $item['title']?></h3>
+                            <p class="text-decoration-none my-2 position-relative custom-link d-block text-start">See More</p>
                         </div>
-                        <div><a href="view.php?id=<?php echo $item['id']?>" class="arrow"><img src="images/expertise/arrow.svg" width="70" height="70" alt="arrow"></a></div>
+                        <div><p class="arrow"><img src="images/expertise/arrow.svg" width="70" height="70" alt="arrow"></p></div>
                     </div>
-                </div>
+                    </a>
                 <?php endforeach; ?>
                 <?php endif; ?>
             </div>

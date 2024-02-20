@@ -70,6 +70,7 @@
     --text-color-black: #262A34;
 }
 body{
+    user-select: none;
     overflow-x: hidden;
     font-family: 'Satoshi', sans-serif !important;}
 .navbar{
@@ -272,6 +273,10 @@ footer .links .head{
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
+footer p {
+    text-align: left !important;
+
+}
 footer .links a{
     color: #2E2F35;
     font-family: Inter;
@@ -330,9 +335,9 @@ footer .links a{
 
 .breadcrumb{
     padding: 150px 0 0;
-    background: linear-gradient(90deg, #ED6EA0 0%, #ED6EA0 0.01%, #EC8C69 100%);
+    background: linear-gradient(90deg, #ED6EA0 0%, #1280c4 0.01%, #EC8C69 75%);
     background-size: 400% 400% !important;
-    animation: gradient 4s ease infinite;
+    animation: gradient 8s ease infinite;
 }
 @keyframes gradient {
 	0% {
@@ -687,12 +692,14 @@ form textarea:hover{
     font-style: normal;
     font-weight: 500;
     line-height: 38px;
+    text-align: left;
     margin-top: 24px;
 }
 .solutions-page .consultations .consultation p{
     font-weight: 400;
     line-height: 24px; /* 150% */
     letter-spacing: 0.32px;
+    text-align: center;
 }
 .solutions-page .consultations .consultation h3{
     font-size: 24px;
@@ -791,20 +798,23 @@ form textarea:hover{
   }
   .expertises{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 60px 104px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px 52px;
   }
   .expertise h3{
     font-size: 32px;
     color: #1C1D1D;
   }
-  .expertise > div a{
+  .expertise{
+    cursor: pointer;
+  }
+  .expertise > div p{
     font-size: 24px;
     color: #1280C4;
   }
   .expertises .expertise .img-fluid{
     width: 550px;
-    height: 550px;
+    height: 380px;
     object-fit: cover;
   }
   .clients{
@@ -818,7 +828,7 @@ form textarea:hover{
   }
   @media(max-width:992px) {
       .expertises{
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 47px;
       }
       .clients{
@@ -841,6 +851,9 @@ form textarea:hover{
 
   @media(max-width:767px) {
     .clients{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .expertises{
         grid-template-columns: repeat(1, 1fr);
     }
   }
@@ -871,4 +884,12 @@ form textarea:hover{
   
   .dropdown>.dropdown-toggle:active {
       pointer-events: none;
+  }
+
+  img{
+    pointer-events: none;
+  }
+
+  .dropdown-toggle::after{
+    content: unset;
   }

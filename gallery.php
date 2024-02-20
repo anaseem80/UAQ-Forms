@@ -20,9 +20,14 @@ $totalRecords = $countData['total'];
 
 $totalPages = ceil($totalRecords / $itemsPerPage);
 ?>
-    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background: var(--Gradient-Colors-G_09, linear-gradient(90deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%));">
-        <h1 class="text-light" data-aos="fade-up">INSPIRATION <span>GALLERY</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
+<style>
+    img{
+        pointer-events: unset !important;
+    }
+</style>
+    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
+        <h1 class="text-light" data-aos-duration="100" data-aos="fade-up">INSPIRATION <span>GALLERY</span></h1>
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos-duration="100" data-aos="fade-right">
             <h1>Gallery</h1>
             <h5>Home / Gallery</h5>
         </div>
@@ -32,10 +37,13 @@ $totalPages = ceil($totalRecords / $itemsPerPage);
         <div class="row">
             <?php if (!empty($gallery)): ?>
                 <?php foreach($gallery as $index => $item): ?>
-                    <div class="col-lg-3 mb-4" data-aos="fade-down">
-                        <a data-fslightbox="gallery" href="assets/uploads/gallery/<?php echo $item['image']?>">
+                    <div class="col-lg-3 mb-4" data-aos-duration="100" data-aos="fade-down">
+                        <a href="quote.php#quote">
                             <img src="assets/uploads/gallery/<?php echo $item['image']?>" class="w-100 object-cover" width="280" height="280" alt="gallery image">
                         </a>
+                        <!-- <a data-fslightbox="gallery" href="assets/uploads/gallery/<?php echo $item['image']?>">
+                            <img src="assets/uploads/gallery/<?php echo $item['image']?>" class="w-100 object-cover" width="280" height="280" alt="gallery image">
+                        </a> -->
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

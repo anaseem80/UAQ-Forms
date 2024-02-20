@@ -75,6 +75,13 @@
 						</a>
 						<hr>
 					</li>
+					<li>
+						<a class="sidenav-item-link" href="faq.php">
+							<i class="mdi mdi-star-half"></i>
+							<span class="nav-text">FAQ</span>
+						</a>
+						<hr>
+					</li>
 
 					<!-- Brands -->
 

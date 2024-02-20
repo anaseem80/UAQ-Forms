@@ -53,10 +53,17 @@ if (isset($_GET['id'])) {
     $totalPages = ceil($totalImages / $imagesPerPage);
 }
 ?>
-
-    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative" style="background-image: var(--Gradient-Colors-G_14, linear-gradient(90deg, #48C6EF 0%, #6F86D6 100%))">
-        <h1 class="text-light" data-aos="fade-up">Print <span>Expertise</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
+<style>
+    img{
+        pointer-events: unset !important;
+    }
+    p{
+        text-align: center !important;
+    }
+</style>
+    <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
+        <h1 class="text-light" data-aos-duration="100" data-aos="fade-up">Print <span>Expertise</span></h1>
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos-duration="100" data-aos="fade-right">
             <h1><?php echo $sub_category[0]['title']?></h1>
             <h5>Home / Expertise / <?php echo $category[0]['name']?> / <?php echo $sub_category[0]['title']?></h5>
         </div>
@@ -64,7 +71,7 @@ if (isset($_GET['id'])) {
 
     <main class="solutions-page main-content-page p-main mt-5">
         <div class="container">
-            <div class="text-center" data-aos="fade-down">
+            <div class="text-center" data-aos-duration="100" data-aos="fade-down">
                 <h2 class="text-color-black"><?php echo $sub_category[0]['subtitle']?></h2>
                 <p class="col-lg-10 col-12 m-auto mt-4">
                 <?php echo $sub_category[0]['description']?>
@@ -75,7 +82,8 @@ if (isset($_GET['id'])) {
                 <?php elseif(!empty($images)): ?>
                 <?php foreach($images as $index => $item): ?>
                     <div class="col-lg-6 my-4">
-                        <a data-fslightbox="gallery" href="<?php echo $item['image_path']?>"><img src="<?php echo $item['image_path']?>" class="w-100 object-cover" width="550" height="550" alt="gallery image"></a>
+                        <a href="quote.php#quote"><img src="<?php echo $item['image_path']?>" class="w-100 object-cover" width="550" height="550" alt="gallery image"></a>
+                        <!-- <a data-fslightbox="gallery" href="<?php echo $item['image_path']?>"><img src="<?php echo $item['image_path']?>" class="w-100 object-cover" width="550" height="550" alt="gallery image"></a> -->
                     </div>
                 <?php endforeach; ?>
                 <?php endif; ?>

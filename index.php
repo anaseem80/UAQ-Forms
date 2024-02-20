@@ -16,10 +16,10 @@ include 'includes/header.php';
                     <div class="swiper-slide" style="background-color: <?php echo $item['color']?>;">
                         <div class="container h-100">
                             <div class="row align-items-center h-100 text-lg-start text-center align-content-center">
-                                <div class="col-lg-6 h-auto" data-aos="fade-left"><h1><span class="d-block"><?php echo $item['title']?></span> <span class="d-block"><?php echo $item['title2']?></span></h1></div>
-                                <div class="col-lg-6 h-auto" data-aos="fade-right">
+                                <div class="col-lg-6 h-auto" data-aos-duration="100" data-aos="fade-left"><h1><span class="d-block"><?php echo $item['title']?></span> <span class="d-block"><?php echo $item['title2']?></span></h1></div>
+                                <div class="col-lg-6 h-auto" data-aos-duration="100" data-aos="fade-right">
                                     <div class="image-slider">
-                                        <img src="../assets/uploads/sliders/<?php echo $item['image']?>" class="d-block h-100 w-100 img-fluid object-contain" alt="slider image">
+                                        <img onContextMenu="return false;" src="../assets/uploads/sliders/<?php echo $item['image']?>" class="d-block h-100 w-100 img-fluid object-contain" alt="slider image">
                                     </div>
                                 </div>    
                             </div>
@@ -32,7 +32,7 @@ include 'includes/header.php';
     <section class="row about-us m-0 p-0 align-items-center">
         <div class="col-xl-6 h-100 p-0 left-side"><img src="images/about.jpg" class="w-100 img-fluid" alt="about"></div>
         <div class="col-xl-6 h-100 right-side">
-            <div class="col-lg-9 col-11 m-auto" data-aos="fade-right">
+            <div class="col-lg-9 col-11 m-auto" data-aos-duration="100" data-aos="fade-right">
                 <h1>ABOUT US</h1>
                 <p>
                     <?php echo $settings['about'] ?>
@@ -43,19 +43,19 @@ include 'includes/header.php';
     </section>
     <section class="computer-forms bg-light p-main" id="computer-forms">
         <div class="container">
-            <h3 class="text-center fs-main text-primary-main">Computer forms. What Makes Them Unique</h3>
+            <h3 class="text-center fs-main text-primary-main">Computer forms. What Makes US Unique</h3>
             <div class="row groups">
-                <div class="col-lg-4 group text-center" data-aos="fade-down">
+                <div class="col-lg-4 group text-center" data-aos-duration="100" data-aos="fade-down">
                     <img src="images/groups/1.svg" width="60" height="70.077" class="img-fluid" alt="icon">
                     <p class="mb-0 mt-3">40,000+</p>
                     <p class="mb-0">Customer</p>
                 </div>
-                <div class="col-lg-4 group text-center" data-aos="fade-down">
+                <div class="col-lg-4 group text-center" data-aos-duration="100" data-aos="fade-down">
                     <img src="images/groups/2.svg" width="60" height="70.077" class="img-fluid" alt="icon">
                     <p class="mb-0 mt-3">400+</p>
                     <p class="mb-0">Products</p>
                 </div>
-                <div class="col-lg-4 group text-center" data-aos="fade-down">
+                <div class="col-lg-4 group text-center" data-aos-duration="100" data-aos="fade-down">
                     <img src="images/groups/3.svg" width="60" height="70.077" class="img-fluid" alt="icon">
                     <p class="mb-0 mt-3">30+</p>
                     <p class="mb-0">Nationalities</p>

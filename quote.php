@@ -21,8 +21,8 @@ include 'includes/header.php';
     }
 </style>
     <div class="breadcrumb header-top text-center justify-content-center flex-column position-relative">
-        <h1 class="text-light" data-aos="fade-up">Online <span>Quote</span></h1>
-        <div class="box bg-white p-5 d-inline-block m-auto" data-aos="fade-right">
+        <h1 class="text-light" data-aos-duration="100" data-aos="fade-up">Online <span>Quote</span></h1>
+        <div class="box bg-white p-5 d-inline-block m-auto" data-aos-duration="100" data-aos="fade-right">
             <h1>Quote</h1>
             <h5>Home / Quote</h5>
         </div>
@@ -30,15 +30,15 @@ include 'includes/header.php';
 
     <main class="solutions-page main-content-page p-main pb-0 mt-5">
         <div class="container">
-            <div class="text-center" data-aos="fade-down">
+            <div class="text-center" data-aos-duration="100" data-aos="fade-down">
                 <h2 class="text-color-black">Get a Quote for Your requirements</h2>
-                <p class="col-lg-8 col-12 m-auto mt-4">Tell us about your requirements and we’ll get back to you with a quote.</p>
+                <p class="col-lg-8 col-12 m-auto mt-4 text-center">Tell us about your requirements and we’ll get back to you with a quote.</p>
             </div>
         </div>
         <div class="cta p-xl-0 p-4">
             <div class="container">
                 <div class="row mb-0">
-                    <div class="col-xl-5 col-md-12 text-light rhs" data-aos="fade-down">
+                    <div class="col-xl-5 col-md-12 text-light rhs" data-aos-duration="100" data-aos="fade-down">
                         <h1>Get a Quote for Your requirements</h1>
                         <p class="text-light">Tell us about your requirements and we’ll get back
                             to you with a quote.</p>

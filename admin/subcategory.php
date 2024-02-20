@@ -1,60 +1,6 @@
 <?php include 'includes/header.php' ?>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $title = $_POST['title'];
-    $category_id = $_POST['category_id'];
-    $description = $_POST['description'];
-    $subtitle = $_POST['subtitle'];
 
-    if (isset($_FILES['image']) && is_array($_FILES['image']['name'])) {
-        $cleanTitle = preg_replace('/[^a-zA-Z0-9]/', '_', $title);
-        $uploadDir = "../assets/uploads/" . $cleanTitle . "/";
-
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true); 
-        }
-
-        $insertSubcategoryQuery = "INSERT INTO sub_categories (category_id, title, description, subtitle) VALUES (?, ?, ?, ?)";
-        $stmtSubcategory = mysqli_prepare($conn, $insertSubcategoryQuery);
-        mysqli_stmt_bind_param($stmtSubcategory, 'isss', $category_id, $title, $description, $subtitle);
-
-        if (mysqli_stmt_execute($stmtSubcategory)) {
-            $subcategory_id = mysqli_insert_id($conn);
-
-            $insertImageQuery = "INSERT INTO images (subcategory_id, image_path) VALUES (?, ?)";
-            $stmtImage = mysqli_prepare($conn, $insertImageQuery);
-            mysqli_stmt_bind_param($stmtImage, 'is', $subcategory_id, $image_path);
-
-            for ($i = 0; $i < count($_FILES['image']['name']); $i++) {
-                $uploadFile = $uploadDir . basename($_FILES['image']['name'][$i]);
-
-                if (move_uploaded_file($_FILES['image']['tmp_name'][$i], $uploadFile)) {
-                    $image_path = $uploadFile;
-
-                    if (!mysqli_stmt_execute($stmtImage)) {
-                        echo 'Error: ' . mysqli_stmt_error($stmtImage);
-                    }
-                } else {
-                    $error_message = "Failed to upload one or more images.";
-                }
-            }
-
-            mysqli_stmt_close($stmtImage);
-
-            $success = 'Sub category and images have been added successfully';
-        } else {
-            echo 'Error: ' . mysqli_stmt_error($stmtSubcategory);
-        }
-
-        mysqli_stmt_close($stmtSubcategory);
-    } else {
-        $error_message = "Please select at least one image.";
-    }
-
-
-}
-?>
 
 <?php
 $success = '';
@@ -328,9 +274,9 @@ if (isset($_POST["updateSubCategory"])) {
         </div> <!-- End Content -->
     </div> <!-- End Content Wrapper -->
 
-    <div class="modal fade" id="AddImage" tabindex="-1" aria-labelledby="AddImageLabel" aria-hidden="true">
+<div class="modal fade" id="AddImage" tabindex="-1" aria-labelledby="AddImageLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="modal-content" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+        <form class="modal-content" id="imageUploadForm" enctype="multipart/form-data">
             <div class="modal-header">
                 <h5 class="modal-title" id="AddImageLabel">Add Sub Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -386,12 +332,46 @@ if (isset($_POST["updateSubCategory"])) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save changes <i class="fa fa-spinner fa-spin d-none"></i></button>
             </div>
         </form>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
+    document.getElementById('imageUploadForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        $(".fa-spin").removeClass("d-none")
+        fetch('php/subcategory.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+
+            if (data.success) {
+                $(".fa-spin").addClass("d-none")
+                setTimeout(() => {
+                    window.location.reload()
+                }, 500);
+                alert('Sub category and images have been added successfully');
+            } else {
+        console.log(formData)
+
+                // Check for the 'error_message' property in the response
+                var errorMessage = data.error_message || 'An error occurred.';
+                alert('Error: ' + errorMessage);
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+</script>
 <?php include 'includes/footer.php' ?>
 <script src='assets/plugins/data-tables/jquery.datatables.min.js'></script>
 <script src='assets/plugins/data-tables/datatables.bootstrap5.min.js'></script>

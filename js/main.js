@@ -79,8 +79,8 @@
 
 window.SmoothScrollOptions = {
 	// Scrolling Core
-	animationTime: 700, // [ms]
-	stepSize: 80, // [px]
+	animationTime: 400, // [ms]
+	stepSize: 150, // [px]
 
 	// Acceleration
 	accelerationDelta: 50, // 50
@@ -122,3 +122,7 @@ $("#quote").submit(function(e){
 		
 	})
 })
+
+// document.addEventListener('contextmenu', function (e) {
+//     e.preventDefault();
+// });

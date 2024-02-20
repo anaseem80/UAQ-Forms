@@ -1,4 +1,4 @@
-<footer class="bg-light p-main">
+<footer class="bg-light p-main pb-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -23,6 +23,7 @@
                                 <li><a class="custom-link" href="gallery.php">Gallery</a></li>
                                 <li><a class="custom-link" href="quote.php">Get Quote</a></li>
                                 <li><a class="custom-link" href="contact-us.php">Contact Us</a></li>
+                                <li><a class="custom-link" href="faq.php">FAQ</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-6 m-lg-0 mb-3">
@@ -60,7 +61,7 @@
                         </div>
                         <div class="links col-lg-12">
                             <p>Call Us:</p>
-                            <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex justify-content-between flex-wrap flex-column">
                                 <p class="d-flex align-items-center"><img src="images/call.svg" width="16" height="16" alt="phone"> <a class="ms-1 custom-link" href="tel:+971 6 766 6727">+971 6 766 6727</a></p>
                                 <p class="d-flex align-items-center"><img src="images/call.svg" width="16" height="16" alt="phone"> <a class="ms-1 custom-link" href="tel:+971 50 796 9292">+971 50 796 9292</a></p>
                                 <p class="d-flex align-items-center"><img src="images/call.svg" width="16" height="16" alt="phone"> <a class="ms-1 custom-link" href="tel:+971 52 911 8822">+971 52 911 8822</a></p>
